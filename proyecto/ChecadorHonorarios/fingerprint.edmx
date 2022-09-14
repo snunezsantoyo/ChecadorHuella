@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Honorarios_Check_DGTITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="administrator">
+          <Key>
+            <PropertyRef Name="administratorID" />
+          </Key>
+          <Property Name="administratorID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="admPassword" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" />
+          <Property Name="lastname2" Type="varchar" MaxLength="50" />
+          <Property Name="fullname" Type="varchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="daysIn">
+          <Key>
+            <PropertyRef Name="daysInID" />
+          </Key>
+          <Property Name="daysInID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="monday" Type="bit" />
+          <Property Name="tuesday" Type="bit" />
+          <Property Name="wednesday" Type="bit" />
+          <Property Name="thursday" Type="bit" />
+          <Property Name="friday" Type="bit" />
+          <Property Name="saturday" Type="bit" />
+        </EntityType>
+        <EntityType Name="fingerprint">
+          <Key>
+            <PropertyRef Name="fingerprintID" />
+          </Key>
+          <Property Name="fingerprintID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="huella" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inAndOutHistory">
+          <Key>
+            <PropertyRef Name="inAndOutHistoryID" />
+          </Key>
+          <Property Name="inAndOutHistoryID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="smallint" Nullable="false" />
+          <Property Name="verifyCheckID" Type="smallint" Nullable="false" />
+          <Property Name="arrivingTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="leavingTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="workDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="schedule">
+          <Key>
+            <PropertyRef Name="scheduleID" />
+          </Key>
+          <Property Name="scheduleID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="daysInID" Type="smallint" Nullable="false" />
+          <Property Name="timeIn" Type="time" Precision="7" />
+          <Property Name="timeOut" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scheduleID" Type="smallint" Nullable="false" />
+          <Property Name="fingerprintID" Type="smallint" Nullable="false" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="lastname2" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="fullname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="jobPosition" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="verifyCheck">
+          <Key>
+            <PropertyRef Name="verifyCheckID" />
+          </Key>
+          <Property Name="verifyCheckID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fingerprintID" Type="smallint" Nullable="false" />
+          <Property Name="checkDate" Type="date" Nullable="false" />
+          <Property Name="checkTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__schedule__daysIn__2C3393D0">
+          <End Role="daysIn" Type="Self.daysIn" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="daysIn">
+              <PropertyRef Name="daysInID" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="daysInID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkfingerprint">
+          <End Role="fingerprint" Type="Self.fingerprint" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fingerprint">
+              <PropertyRef Name="fingerprintID" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="fingerprintID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkfingerprint2">
+          <End Role="fingerprint" Type="Self.fingerprint" Multiplicity="1" />
+          <End Role="verifyCheck" Type="Self.verifyCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fingerprint">
+              <PropertyRef Name="fingerprintID" />
+            </Principal>
+            <Dependent Role="verifyCheck">
+              <PropertyRef Name="fingerprintID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkscheduleID">
+          <End Role="schedule" Type="Self.schedule" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule">
+              <PropertyRef Name="scheduleID" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="scheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkusers">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="inAndOutHistory" Type="Self.inAndOutHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="inAndOutHistory">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkverifyCheck">
+          <End Role="verifyCheck" Type="Self.verifyCheck" Multiplicity="1" />
+          <End Role="inAndOutHistory" Type="Self.inAndOutHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="verifyCheck">
+              <PropertyRef Name="verifyCheckID" />
+            </Principal>
+            <Dependent Role="inAndOutHistory">
+              <PropertyRef Name="verifyCheckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Honorarios_Check_DGTITModelStoreContainer">
+          <EntitySet Name="administrator" EntityType="Self.administrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="daysIn" EntityType="Self.daysIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fingerprint" EntityType="Self.fingerprint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inAndOutHistory" EntityType="Self.inAndOutHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="schedule" EntityType="Self.schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="verifyCheck" EntityType="Self.verifyCheck" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__schedule__daysIn__2C3393D0" Association="Self.FK__schedule__daysIn__2C3393D0">
+            <End Role="daysIn" EntitySet="daysIn" />
+            <End Role="schedule" EntitySet="schedule" />
+          </AssociationSet>
+          <AssociationSet Name="fkfingerprint" Association="Self.fkfingerprint">
+            <End Role="fingerprint" EntitySet="fingerprint" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="fkfingerprint2" Association="Self.fkfingerprint2">
+            <End Role="fingerprint" EntitySet="fingerprint" />
+            <End Role="verifyCheck" EntitySet="verifyCheck" />
+          </AssociationSet>
+          <AssociationSet Name="fkscheduleID" Association="Self.fkscheduleID">
+            <End Role="schedule" EntitySet="schedule" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="fkusers" Association="Self.fkusers">
+            <End Role="users" EntitySet="users" />
+            <End Role="inAndOutHistory" EntitySet="inAndOutHistory" />
+          </AssociationSet>
+          <AssociationSet Name="fkverifyCheck" Association="Self.fkverifyCheck">
+            <End Role="verifyCheck" EntitySet="verifyCheck" />
+            <End Role="inAndOutHistory" EntitySet="inAndOutHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Honorarios_Check_DGTITModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="administrator">
+          <Key>
+            <PropertyRef Name="administratorID" />
+          </Key>
+          <Property Name="administratorID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="admPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastname2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="daysIn">
+          <Key>
+            <PropertyRef Name="daysInID" />
+          </Key>
+          <Property Name="daysInID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="monday" Type="Boolean" />
+          <Property Name="tuesday" Type="Boolean" />
+          <Property Name="wednesday" Type="Boolean" />
+          <Property Name="thursday" Type="Boolean" />
+          <Property Name="friday" Type="Boolean" />
+          <Property Name="saturday" Type="Boolean" />
+          <NavigationProperty Name="schedules" Relationship="Self.FK__schedule__daysIn__2C3393D0" FromRole="daysIn" ToRole="schedule" />
+        </EntityType>
+        <EntityType Name="fingerprint">
+          <Key>
+            <PropertyRef Name="fingerprintID" />
+          </Key>
+          <Property Name="fingerprintID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="huella" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.fkfingerprint" FromRole="fingerprint" ToRole="users" />
+          <NavigationProperty Name="verifyChecks" Relationship="Self.fkfingerprint2" FromRole="fingerprint" ToRole="verifyCheck" />
+        </EntityType>
+        <EntityType Name="inAndOutHistory">
+          <Key>
+            <PropertyRef Name="inAndOutHistoryID" />
+          </Key>
+          <Property Name="inAndOutHistoryID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int16" Nullable="false" />
+          <Property Name="verifyCheckID" Type="Int16" Nullable="false" />
+          <Property Name="arrivingTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="leavingTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="workDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="user" Relationship="Self.fkusers" FromRole="inAndOutHistory" ToRole="users" />
+          <NavigationProperty Name="verifyCheck" Relationship="Self.fkverifyCheck" FromRole="inAndOutHistory" ToRole="verifyCheck" />
+        </EntityType>
+        <EntityType Name="schedule">
+          <Key>
+            <PropertyRef Name="scheduleID" />
+          </Key>
+          <Property Name="scheduleID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="daysInID" Type="Int16" Nullable="false" />
+          <Property Name="timeIn" Type="Time" Precision="7" />
+          <Property Name="timeOut" Type="Time" Precision="7" />
+          <NavigationProperty Name="daysIn" Relationship="Self.FK__schedule__daysIn__2C3393D0" FromRole="schedule" ToRole="daysIn" />
+          <NavigationProperty Name="users" Relationship="Self.fkscheduleID" FromRole="schedule" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scheduleID" Type="Int16" Nullable="false" />
+          <Property Name="fingerprintID" Type="Int16" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname2" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jobPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="fingerprint" Relationship="Self.fkfingerprint" FromRole="users" ToRole="fingerprint" />
+          <NavigationProperty Name="inAndOutHistories" Relationship="Self.fkusers" FromRole="users" ToRole="inAndOutHistory" />
+          <NavigationProperty Name="schedule" Relationship="Self.fkscheduleID" FromRole="users" ToRole="schedule" />
+        </EntityType>
+        <EntityType Name="verifyCheck">
+          <Key>
+            <PropertyRef Name="verifyCheckID" />
+          </Key>
+          <Property Name="verifyCheckID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fingerprintID" Type="Int16" Nullable="false" />
+          <Property Name="checkDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="checkTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="fingerprint" Relationship="Self.fkfingerprint2" FromRole="verifyCheck" ToRole="fingerprint" />
+          <NavigationProperty Name="inAndOutHistories" Relationship="Self.fkverifyCheck" FromRole="verifyCheck" ToRole="inAndOutHistory" />
+        </EntityType>
+        <Association Name="FK__schedule__daysIn__2C3393D0">
+          <End Role="daysIn" Type="Self.daysIn" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="daysIn">
+              <PropertyRef Name="daysInID" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="daysInID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkfingerprint">
+          <End Role="fingerprint" Type="Self.fingerprint" Multiplicity="1" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fingerprint">
+              <PropertyRef Name="fingerprintID" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="fingerprintID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkfingerprint2">
+          <End Role="fingerprint" Type="Self.fingerprint" Multiplicity="1" />
+          <End Role="verifyCheck" Type="Self.verifyCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fingerprint">
+              <PropertyRef Name="fingerprintID" />
+            </Principal>
+            <Dependent Role="verifyCheck">
+              <PropertyRef Name="fingerprintID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkusers">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="inAndOutHistory" Type="Self.inAndOutHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="inAndOutHistory">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkverifyCheck">
+          <End Role="verifyCheck" Type="Self.verifyCheck" Multiplicity="1" />
+          <End Role="inAndOutHistory" Type="Self.inAndOutHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="verifyCheck">
+              <PropertyRef Name="verifyCheckID" />
+            </Principal>
+            <Dependent Role="inAndOutHistory">
+              <PropertyRef Name="verifyCheckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkscheduleID">
+          <End Role="schedule" Type="Self.schedule" Multiplicity="1" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule">
+              <PropertyRef Name="scheduleID" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="scheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Honorarios_Check_DGTITEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="administrators" EntityType="Self.administrator" />
+          <EntitySet Name="daysIns" EntityType="Self.daysIn" />
+          <EntitySet Name="fingerprints" EntityType="Self.fingerprint" />
+          <EntitySet Name="inAndOutHistories" EntityType="Self.inAndOutHistory" />
+          <EntitySet Name="schedules" EntityType="Self.schedule" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="verifyChecks" EntityType="Self.verifyCheck" />
+          <AssociationSet Name="FK__schedule__daysIn__2C3393D0" Association="Self.FK__schedule__daysIn__2C3393D0">
+            <End Role="daysIn" EntitySet="daysIns" />
+            <End Role="schedule" EntitySet="schedules" />
+          </AssociationSet>
+          <AssociationSet Name="fkfingerprint" Association="Self.fkfingerprint">
+            <End Role="fingerprint" EntitySet="fingerprints" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="fkfingerprint2" Association="Self.fkfingerprint2">
+            <End Role="fingerprint" EntitySet="fingerprints" />
+            <End Role="verifyCheck" EntitySet="verifyChecks" />
+          </AssociationSet>
+          <AssociationSet Name="fkusers" Association="Self.fkusers">
+            <End Role="users" EntitySet="users" />
+            <End Role="inAndOutHistory" EntitySet="inAndOutHistories" />
+          </AssociationSet>
+          <AssociationSet Name="fkverifyCheck" Association="Self.fkverifyCheck">
+            <End Role="verifyCheck" EntitySet="verifyChecks" />
+            <End Role="inAndOutHistory" EntitySet="inAndOutHistories" />
+          </AssociationSet>
+          <AssociationSet Name="fkscheduleID" Association="Self.fkscheduleID">
+            <End Role="schedule" EntitySet="schedules" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Honorarios_Check_DGTITModelStoreContainer" CdmEntityContainer="Honorarios_Check_DGTITEntities">
+          <EntitySetMapping Name="administrators">
+            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.administrator">
+              <MappingFragment StoreEntitySet="administrator">
+                <ScalarProperty Name="administratorID" ColumnName="administratorID" />
+                <ScalarProperty Name="admPassword" ColumnName="admPassword" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="lastname2" ColumnName="lastname2" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="daysIns">
+            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.daysIn">
+              <MappingFragment StoreEntitySet="daysIn">
+                <ScalarProperty Name="daysInID" ColumnName="daysInID" />
+                <ScalarProperty Name="monday" ColumnName="monday" />
+                <ScalarProperty Name="tuesday" ColumnName="tuesday" />
+                <ScalarProperty Name="wednesday" ColumnName="wednesday" />
+                <ScalarProperty Name="thursday" ColumnName="thursday" />
+                <ScalarProperty Name="friday" ColumnName="friday" />
+                <ScalarProperty Name="saturday" ColumnName="saturday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fingerprints">
+            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.fingerprint">
+              <MappingFragment StoreEntitySet="fingerprint">
+                <ScalarProperty Name="fingerprintID" ColumnName="fingerprintID" />
+                <ScalarProperty Name="huella" ColumnName="huella" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inAndOutHistories">
+            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.inAndOutHistory">
+              <MappingFragment StoreEntitySet="inAndOutHistory">
+                <ScalarProperty Name="inAndOutHistoryID" ColumnName="inAndOutHistoryID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="verifyCheckID" ColumnName="verifyCheckID" />
+                <ScalarProperty Name="arrivingTime" ColumnName="arrivingTime" />
+                <ScalarProperty Name="leavingTime" ColumnName="leavingTime" />
+                <ScalarProperty Name="workDate" ColumnName="workDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="schedules">
+            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.schedule">
+              <MappingFragment StoreEntitySet="schedule">
+                <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
+                <ScalarProperty Name="daysInID" ColumnName="daysInID" />
+                <ScalarProperty Name="timeIn" ColumnName="timeIn" />
+                <ScalarProperty Name="timeOut" ColumnName="timeOut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
+                <ScalarProperty Name="fingerprintID" ColumnName="fingerprintID" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="lastname2" ColumnName="lastname2" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="jobPosition" ColumnName="jobPosition" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="verifyChecks">
+            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.verifyCheck">
+              <MappingFragment StoreEntitySet="verifyCheck">
+                <ScalarProperty Name="verifyCheckID" ColumnName="verifyCheckID" />
+                <ScalarProperty Name="fingerprintID" ColumnName="fingerprintID" />
+                <ScalarProperty Name="checkDate" ColumnName="checkDate" />
+                <ScalarProperty Name="checkTime" ColumnName="checkTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
