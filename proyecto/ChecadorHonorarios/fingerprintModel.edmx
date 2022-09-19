@@ -5,18 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Honorarios_Check_DGTITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="administrator">
-          <Key>
-            <PropertyRef Name="administratorID" />
-          </Key>
-          <Property Name="administratorID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="admPassword" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="lastname" Type="varchar" MaxLength="50" />
-          <Property Name="lastname2" Type="varchar" MaxLength="50" />
-          <Property Name="fullname" Type="varchar" MaxLength="100" />
-          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="daysIn">
           <Key>
             <PropertyRef Name="daysInID" />
@@ -153,7 +141,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Honorarios_Check_DGTITModelStoreContainer">
-          <EntitySet Name="administrator" EntityType="Self.administrator" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="daysIn" EntityType="Self.daysIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fingerprint" EntityType="Self.fingerprint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="inAndOutHistory" EntityType="Self.inAndOutHistory" Schema="dbo" store:Type="Tables" />
@@ -190,18 +177,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Honorarios_Check_DGTITModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="administrator">
-          <Key>
-            <PropertyRef Name="administratorID" />
-          </Key>
-          <Property Name="administratorID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="admPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="lastname2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="daysIn">
           <Key>
             <PropertyRef Name="daysInID" />
@@ -350,7 +325,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Honorarios_Check_DGTITEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="administrators" EntityType="Self.administrator" />
           <EntitySet Name="daysIns" EntityType="Self.daysIn" />
           <EntitySet Name="fingerprints" EntityType="Self.fingerprint" />
           <EntitySet Name="inAndOutHistories" EntityType="Self.inAndOutHistory" />
@@ -388,19 +362,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Honorarios_Check_DGTITModelStoreContainer" CdmEntityContainer="Honorarios_Check_DGTITEntities">
-          <EntitySetMapping Name="administrators">
-            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.administrator">
-              <MappingFragment StoreEntitySet="administrator">
-                <ScalarProperty Name="administratorID" ColumnName="administratorID" />
-                <ScalarProperty Name="admPassword" ColumnName="admPassword" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="lastname" ColumnName="lastname" />
-                <ScalarProperty Name="lastname2" ColumnName="lastname2" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="email" ColumnName="email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="daysIns">
             <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.daysIn">
               <MappingFragment StoreEntitySet="daysIn">

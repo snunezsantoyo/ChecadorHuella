@@ -71,9 +71,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="administrator.cs">
-      <DependentUpon>fingerprint.tt</DependentUpon>
-    </Compile>
     <Compile Include="CapturarHuella.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,28 +84,28 @@
       <DependentUpon>CaptureForm.cs</DependentUpon>
     </Compile>
     <Compile Include="daysIn.cs">
-      <DependentUpon>fingerprint.tt</DependentUpon>
-    </Compile>
-    <Compile Include="fingerprint.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>fingerprint.Context.tt</DependentUpon>
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <Compile Include="fingerprint.cs">
-      <DependentUpon>fingerprint.tt</DependentUpon>
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="fingerprint.Designer.cs">
+    <Compile Include="fingerprintModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>fingerprint.edmx</DependentUpon>
+      <DependentUpon>fingerprintModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="fingerprint1.cs">
+    <Compile Include="fingerprintModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>fingerprint.tt</DependentUpon>
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fingerprintModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fingerprintModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="inAndOutHistory.cs">
-      <DependentUpon>fingerprint.tt</DependentUpon>
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -125,10 +122,10 @@
       <DependentUpon>Registrar.cs</DependentUpon>
     </Compile>
     <Compile Include="schedule.cs">
-      <DependentUpon>fingerprint.tt</DependentUpon>
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <Compile Include="user.cs">
-      <DependentUpon>fingerprint.tt</DependentUpon>
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Verificar.cs">
       <SubType>Form</SubType>
@@ -137,7 +134,7 @@
       <DependentUpon>Verificar.cs</DependentUpon>
     </Compile>
     <Compile Include="verifyCheck.cs">
-      <DependentUpon>fingerprint.tt</DependentUpon>
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -154,12 +151,12 @@
     <EmbeddedResource Include="Registrar.resx">
       <DependentUpon>Registrar.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="fingerprint.edmx">
+    <EntityDeploy Include="fingerprintModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>fingerprint.Designer.cs</LastGenOutput>
+      <LastGenOutput>fingerprintModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="fingerprint.edmx.diagram">
-      <DependentUpon>fingerprint.edmx</DependentUpon>
+    <None Include="fingerprintModel.edmx.diagram">
+      <DependentUpon>fingerprintModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -179,15 +176,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fingerprint.Context.tt">
+    <Content Include="fingerprintModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>fingerprint.edmx</DependentUpon>
-      <LastGenOutput>fingerprint.Context.cs</LastGenOutput>
+      <DependentUpon>fingerprintModel.edmx</DependentUpon>
+      <LastGenOutput>fingerprintModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="fingerprint.tt">
+    <Content Include="fingerprintModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>fingerprint.edmx</DependentUpon>
-      <LastGenOutput>fingerprint1.cs</LastGenOutput>
+      <DependentUpon>fingerprintModel.edmx</DependentUpon>
+      <LastGenOutput>fingerprintModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

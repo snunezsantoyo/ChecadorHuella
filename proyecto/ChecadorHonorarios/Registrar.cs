@@ -14,7 +14,7 @@ namespace ChecadorHonorarios
     public partial class Registrar : Form
     {
         private DPFP.Template Template;
-       // private Honorarios_Check_DGTITEntities contexto;
+        private Honorarios_Check_DGTITEntities contexto;
         public Registrar()
         {
             InitializeComponent();
@@ -22,24 +22,10 @@ namespace ChecadorHonorarios
 
         private void Registrar_Load(object sender, EventArgs e)
         {
-          //  contexto = new Honorarios_Check_DGTITEntities();
-
+            contexto = new Honorarios_Check_DGTITEntities();
+            Listar();
             
 
-        }
-
-        private void Listar()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                //var fingerprint = from 
-
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -78,6 +64,57 @@ namespace ChecadorHonorarios
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Limpiar()
+        {
+            txtNombre.Text = "";
+        }
+
+        private void Listar()
+        {
+            try
+            {
+                var fingerprint = from finger in contexto.fingerprints
+                                select new
+                                {
+                                    id = finger.fingerprintID,
+                                   // huella = finger.huella,     
+                                };
+                if (fingerprint != null)
+                {
+                     DgvListar.DataSource = fingerprint.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void BtnAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                byte[] streamHuella = Template.Bytes;
+                fingerprint fingerprint = new fingerprint()
+                {
+                    huella = streamHuella
+                };
+
+                contexto.fingerprints.Add(fingerprint);
+                contexto.SaveChanges();
+                MessageBox.Show("Agregado correctamente");
+                Limpiar();
+                Listar();
+                Template = null;
+                BtnAgregar.Enabled = false;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

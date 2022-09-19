@@ -25,7 +25,6 @@ namespace ChecadorHonorarios
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<administrator> administrators { get; set; }
         public virtual DbSet<daysIn> daysIns { get; set; }
         public virtual DbSet<fingerprint> fingerprints { get; set; }
         public virtual DbSet<inAndOutHistory> inAndOutHistories { get; set; }
