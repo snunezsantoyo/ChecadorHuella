@@ -61,3 +61,13 @@ create table inAndOutHistory(
     constraint fkverifyCheck foreign key (verifyCheckID) REFERENCES verifyCheck(verifyCheckID)
 );
 
+create table administrator (
+    administratorID smallint not null identity(1,1) primary key,
+    admPassword varchar (100) not null,
+    name varchar (50) not null,
+    lastname varchar (50),
+    lastname2 varchar (50),
+    fullname varchar (100),
+    email varchar (50) not null
+);
+
