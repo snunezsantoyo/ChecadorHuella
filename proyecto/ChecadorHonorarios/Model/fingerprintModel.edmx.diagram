@@ -17,6 +17,7 @@
         <AssociationConnector Association="Honorarios_Check_DGTITModel.fkusers" ManuallyRouted="false" />
         <AssociationConnector Association="Honorarios_Check_DGTITModel.fkverifyCheck" ManuallyRouted="false" />
         <AssociationConnector Association="Honorarios_Check_DGTITModel.fkscheduleID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.administrator" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

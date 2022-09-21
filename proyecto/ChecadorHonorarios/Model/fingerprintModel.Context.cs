@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ChecadorHonorarios
+namespace ChecadorHonorarios.Model
 {
     using System;
     using System.Data.Entity;
@@ -31,5 +31,6 @@ namespace ChecadorHonorarios
         public virtual DbSet<schedule> schedules { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<verifyCheck> verifyChecks { get; set; }
+        public virtual DbSet<administrator> administrators { get; set; }
     }
 }

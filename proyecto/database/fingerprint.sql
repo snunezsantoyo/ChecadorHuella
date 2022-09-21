@@ -68,6 +68,7 @@ create table administrator (
     lastname varchar (50),
     lastname2 varchar (50),
     fullname varchar (100),
-    email varchar (50) not null
+    email varchar (50) not null,
+    addAdmin bit default 0
 );
 
