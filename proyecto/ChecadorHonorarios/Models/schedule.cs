@@ -7,28 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ChecadorHonorarios.Model
+namespace ChecadorHonorarios.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class daysIn
+    public partial class schedule
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public daysIn()
+        public schedule()
         {
-            this.schedules = new HashSet<schedule>();
+            this.users = new HashSet<user>();
         }
     
+        public short scheduleID { get; set; }
         public short daysInID { get; set; }
-        public Nullable<bool> monday { get; set; }
-        public Nullable<bool> tuesday { get; set; }
-        public Nullable<bool> wednesday { get; set; }
-        public Nullable<bool> thursday { get; set; }
-        public Nullable<bool> friday { get; set; }
-        public Nullable<bool> saturday { get; set; }
+        public Nullable<System.TimeSpan> timeIn { get; set; }
+        public Nullable<System.TimeSpan> timeOut { get; set; }
     
+        public virtual daysIn daysIn { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<schedule> schedules { get; set; }
+        public virtual ICollection<user> users { get; set; }
     }
 }

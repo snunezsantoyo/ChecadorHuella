@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ChecadorHonorarios.Model
+namespace ChecadorHonorarios.Models
 {
     using System;
     using System.Data.Entity;

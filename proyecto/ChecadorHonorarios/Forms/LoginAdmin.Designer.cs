@@ -103,9 +103,9 @@
             // 
             // mostrarContraseña
             // 
-            this.mostrarContraseña.Location = new System.Drawing.Point(561, 221);
+            this.mostrarContraseña.Location = new System.Drawing.Point(562, 217);
             this.mostrarContraseña.Name = "mostrarContraseña";
-            this.mostrarContraseña.Size = new System.Drawing.Size(77, 22);
+            this.mostrarContraseña.Size = new System.Drawing.Size(68, 30);
             this.mostrarContraseña.TabIndex = 7;
             this.mostrarContraseña.Text = "mostrar";
             this.mostrarContraseña.UseVisualStyleBackColor = true;

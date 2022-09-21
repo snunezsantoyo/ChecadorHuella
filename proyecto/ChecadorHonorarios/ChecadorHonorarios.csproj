@@ -71,7 +71,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\administrator.cs">
+    <Compile Include="Controllers\LoginAdminController.cs" />
+    <Compile Include="Models\administrator.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Forms\CapturarHuella.cs">
@@ -86,28 +87,28 @@
     <Compile Include="Forms\CaptureForm.Designer.cs">
       <DependentUpon>CaptureForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\daysIn.cs">
+    <Compile Include="Models\daysIn.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\fingerprint.cs">
+    <Compile Include="Models\fingerprint.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\fingerprintModel.Context.cs">
+    <Compile Include="Models\fingerprintModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>fingerprintModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\fingerprintModel.cs">
+    <Compile Include="Models\fingerprintModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\fingerprintModel.Designer.cs">
+    <Compile Include="Models\fingerprintModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\inAndOutHistory.cs">
+    <Compile Include="Models\inAndOutHistory.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginAdmin.cs">
@@ -136,10 +137,10 @@
     <Compile Include="Forms\Registrar.Designer.cs">
       <DependentUpon>Registrar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\schedule.cs">
+    <Compile Include="Models\schedule.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\user.cs">
+    <Compile Include="Models\user.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Forms\Verificar.cs">
@@ -148,7 +149,7 @@
     <Compile Include="Forms\Verificar.Designer.cs">
       <DependentUpon>Verificar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\verifyCheck.cs">
+    <Compile Include="Models\verifyCheck.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\LoginAdmin.resx">
@@ -175,11 +176,11 @@
     <EmbeddedResource Include="Forms\Registrar.resx">
       <DependentUpon>Registrar.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\fingerprintModel.edmx">
+    <EntityDeploy Include="Models\fingerprintModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>fingerprintModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\fingerprintModel.edmx.diagram">
+    <None Include="Models\fingerprintModel.edmx.diagram">
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -200,19 +201,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\fingerprintModel.Context.tt">
+    <Content Include="Models\fingerprintModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
       <LastGenOutput>fingerprintModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\fingerprintModel.tt">
+    <Content Include="Models\fingerprintModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
       <LastGenOutput>fingerprintModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logic\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using ChecadorHonorarios.Model;
+﻿using ChecadorHonorarios.Controllers;
+using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,14 +15,31 @@ namespace ChecadorHonorarios
 {
     public partial class LoginAdmin : Form
     {
-        private Honorarios_Check_DGTITEntities contexto;
+      //  private Honorarios_Check_DGTITEntities contexto;
+        private LoginAdminController LoginAdminController;
+
         private void LoginAdmin_Load(object sender, EventArgs e)
         {
-            contexto = new Honorarios_Check_DGTITEntities();
+           
         }
         public LoginAdmin()
         {
             InitializeComponent();
+
+
+
+            mostrarContraseña.MouseDown += (sender, args) =>
+            {
+                ContraseñaText.PasswordChar = '\0';
+            };
+
+            mostrarContraseña.MouseUp += (sender, args) =>
+            {
+               
+                ContraseñaText.PasswordChar = '*';
+            };
+
+
         }
 
         private void Entrar_Click(object sender, EventArgs e)
@@ -47,60 +65,23 @@ namespace ChecadorHonorarios
                     emptyContraseña.Text = "Ingrese contraseña";
                     emptyContraseña.Visible = true;
                 }
-                    else emptyContraseña.Visible = false;
-                    
-                    
-                
+                    else emptyContraseña.Visible = false;    
             }
             else
             {
-                checarAdmin();
+                string usuario = UsuarioText.Text;
+                string contraseña = ContraseñaText.Text;
+                LoginAdminController = new LoginAdminController();
+                LoginAdminController.ChecarAdmin(usuario, contraseña);
+                UsuarioText.Clear();
+                ContraseñaText.Clear();
+
             }
 
             
 
          
         }
-
-        private void checarAdmin()
-        {
-            try
-            {
-                string usuario = UsuarioText.Text;
-                string contraseña = ContraseñaText.Text;
-
-                // administrator admin = new administrator();
-                using (contexto)
-                {
-                    var admin = contexto.administrators
-                    .Where(a => a.email == usuario && a.admPassword == contraseña)
-                    .FirstOrDefault();
-
-                    if (admin.administratorID == 1)
-                    {
-                        MessageBox.Show("Funciona: " + admin.email);
-                    }
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-            }
-        }
-        public void mostrarContraseña_MouseDown(object sender, EventArgs e)
-        {
-            ContraseñaText.PasswordChar = '\0';
-        }
-
-        public void mostrarContraseña_MouseUp(object sender, EventArgs e)
-        {
-            ContraseñaText.PasswordChar = '*';
-        }
-
-       
 
 
     }

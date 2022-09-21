@@ -1,4 +1,4 @@
-﻿using ChecadorHonorarios.Model;
+﻿using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
