@@ -71,73 +71,97 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CapturarHuella.cs">
+    <Compile Include="Model\administrator.cs">
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CapturarHuella.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CapturarHuella.Designer.cs">
+    <Compile Include="Forms\CapturarHuella.Designer.cs">
       <DependentUpon>CapturarHuella.cs</DependentUpon>
     </Compile>
-    <Compile Include="CaptureForm.cs">
+    <Compile Include="Forms\CaptureForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CaptureForm.Designer.cs">
+    <Compile Include="Forms\CaptureForm.Designer.cs">
       <DependentUpon>CaptureForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="daysIn.cs">
+    <Compile Include="Model\daysIn.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="fingerprint.cs">
+    <Compile Include="Model\fingerprint.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="fingerprintModel.Context.cs">
+    <Compile Include="Model\fingerprintModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>fingerprintModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="fingerprintModel.cs">
+    <Compile Include="Model\fingerprintModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="fingerprintModel.Designer.cs">
+    <Compile Include="Model\fingerprintModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="inAndOutHistory.cs">
+    <Compile Include="Model\inAndOutHistory.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="Forms\LoginAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="Forms\LoginAdmin.Designer.cs">
+      <DependentUpon>LoginAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NewAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewAdmin.Designer.cs">
+      <DependentUpon>NewAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registrar.cs">
+    <Compile Include="Forms\Registrar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar.Designer.cs">
+    <Compile Include="Forms\Registrar.Designer.cs">
       <DependentUpon>Registrar.cs</DependentUpon>
     </Compile>
-    <Compile Include="schedule.cs">
+    <Compile Include="Model\schedule.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="user.cs">
+    <Compile Include="Model\user.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Verificar.cs">
+    <Compile Include="Forms\Verificar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Verificar.Designer.cs">
+    <Compile Include="Forms\Verificar.Designer.cs">
       <DependentUpon>Verificar.cs</DependentUpon>
     </Compile>
-    <Compile Include="verifyCheck.cs">
+    <Compile Include="Model\verifyCheck.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="Forms\LoginAdmin.resx">
+      <DependentUpon>LoginAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewAdmin.resx">
+      <DependentUpon>NewAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Verificar.resx">
+      <DependentUpon>Verificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -148,14 +172,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Registrar.resx">
+    <EmbeddedResource Include="Forms\Registrar.resx">
       <DependentUpon>Registrar.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="fingerprintModel.edmx">
+    <EntityDeploy Include="Model\fingerprintModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>fingerprintModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="fingerprintModel.edmx.diagram">
+    <None Include="Model\fingerprintModel.edmx.diagram">
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -176,16 +200,19 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fingerprintModel.Context.tt">
+    <Content Include="Model\fingerprintModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
       <LastGenOutput>fingerprintModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="fingerprintModel.tt">
+    <Content Include="Model\fingerprintModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
       <LastGenOutput>fingerprintModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

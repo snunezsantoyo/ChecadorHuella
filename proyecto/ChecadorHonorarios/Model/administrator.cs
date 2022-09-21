@@ -7,21 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ChecadorHonorarios
+namespace ChecadorHonorarios.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class inAndOutHistory
+    public partial class administrator
     {
-        public short inAndOutHistoryID { get; set; }
-        public short userID { get; set; }
-        public short verifyCheckID { get; set; }
-        public System.TimeSpan arrivingTime { get; set; }
-        public System.TimeSpan leavingTime { get; set; }
-        public System.DateTime workDate { get; set; }
-    
-        public virtual user user { get; set; }
-        public virtual verifyCheck verifyCheck { get; set; }
+        public short administratorID { get; set; }
+        public string admPassword { get; set; }
+        public string name { get; set; }
+        public string lastname { get; set; }
+        public string lastname2 { get; set; }
+        public string fullname { get; set; }
+        public string email { get; set; }
+        public Nullable<bool> addAdmin { get; set; }
     }
 }

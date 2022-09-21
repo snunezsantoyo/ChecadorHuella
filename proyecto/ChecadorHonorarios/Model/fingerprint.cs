@@ -7,33 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ChecadorHonorarios
+namespace ChecadorHonorarios.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class fingerprint
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
+        public fingerprint()
         {
-            this.inAndOutHistories = new HashSet<inAndOutHistory>();
+            this.users = new HashSet<user>();
+            this.verifyChecks = new HashSet<verifyCheck>();
         }
     
-        public short userID { get; set; }
-        public short scheduleID { get; set; }
         public short fingerprintID { get; set; }
-        public System.DateTime birthday { get; set; }
-        public string name { get; set; }
-        public string lastname { get; set; }
-        public string lastname2 { get; set; }
-        public string fullname { get; set; }
-        public string jobPosition { get; set; }
-        public string email { get; set; }
+        public byte[] huella { get; set; }
     
-        public virtual fingerprint fingerprint { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<inAndOutHistory> inAndOutHistories { get; set; }
-        public virtual schedule schedule { get; set; }
+        public virtual ICollection<user> users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<verifyCheck> verifyChecks { get; set; }
     }
 }

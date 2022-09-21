@@ -30,7 +30,10 @@ namespace ChecadorHonorarios
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            Verificar loginAdmin = new Verificar();
+            loginAdmin.ShowDialog();
+            /*LoginAdmin loginAdmin = new LoginAdmin();
+            loginAdmin.ShowDialog();*/
         }
     }
 }
