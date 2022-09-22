@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChecadorHonorarios.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,8 +20,13 @@ namespace ChecadorHonorarios
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Registrar formRegistrar = new Registrar();
+            //Inicializar y abrir vista Registrar
+            CapturarUsuario formRegistrar = new CapturarUsuario();
             formRegistrar.ShowDialog();
+
+            /*
+            Registrar formRegistrar = new Registrar();
+            formRegistrar.ShowDialog();*/
         }
 
         private void Main_Load(object sender, EventArgs e)

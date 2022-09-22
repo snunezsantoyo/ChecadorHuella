@@ -13,7 +13,7 @@ namespace ChecadorHonorarios.Controllers
         private Honorarios_Check_DGTITEntities contexto;
        
 
-
+    //Función para checar que el usuario ingresado y la contraseña sean validos 
         public void ChecarAdmin(string usuario, string contraseña)
         {
             try
@@ -29,6 +29,8 @@ namespace ChecadorHonorarios.Controllers
                     if (admin != null)
                     {
                         MessageBox.Show("Funciona: " + admin.email);
+                        Main main  = new Main();
+                        main.ShowDialog();
                     }
                     else
                     {
@@ -45,13 +47,5 @@ namespace ChecadorHonorarios.Controllers
             }
         }
 
-       
-
     }
-
-
-
-
-
-
 }
