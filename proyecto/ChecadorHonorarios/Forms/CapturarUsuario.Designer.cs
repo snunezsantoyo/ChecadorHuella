@@ -97,7 +97,7 @@
             // nombreLabel
             // 
             this.nombreLabel.AutoSize = true;
-            this.nombreLabel.Location = new System.Drawing.Point(56, 117);
+            this.nombreLabel.Location = new System.Drawing.Point(48, 117);
             this.nombreLabel.Name = "nombreLabel";
             this.nombreLabel.Size = new System.Drawing.Size(77, 16);
             this.nombreLabel.TabIndex = 7;
@@ -106,7 +106,7 @@
             // Apellidolabel1
             // 
             this.Apellidolabel1.AutoSize = true;
-            this.Apellidolabel1.Location = new System.Drawing.Point(23, 186);
+            this.Apellidolabel1.Location = new System.Drawing.Point(15, 186);
             this.Apellidolabel1.Name = "Apellidolabel1";
             this.Apellidolabel1.Size = new System.Drawing.Size(110, 16);
             this.Apellidolabel1.TabIndex = 8;
@@ -115,7 +115,7 @@
             // Apellidolabel2
             // 
             this.Apellidolabel2.AutoSize = true;
-            this.Apellidolabel2.Location = new System.Drawing.Point(21, 259);
+            this.Apellidolabel2.Location = new System.Drawing.Point(13, 256);
             this.Apellidolabel2.Name = "Apellidolabel2";
             this.Apellidolabel2.Size = new System.Drawing.Size(112, 16);
             this.Apellidolabel2.TabIndex = 9;
@@ -124,7 +124,7 @@
             // Correo
             // 
             this.Correo.AutoSize = true;
-            this.Correo.Location = new System.Drawing.Point(426, 114);
+            this.Correo.Location = new System.Drawing.Point(423, 120);
             this.Correo.Name = "Correo";
             this.Correo.Size = new System.Drawing.Size(51, 16);
             this.Correo.TabIndex = 10;
@@ -142,7 +142,7 @@
             // Puestolabel
             // 
             this.Puestolabel.AutoSize = true;
-            this.Puestolabel.Location = new System.Drawing.Point(423, 256);
+            this.Puestolabel.Location = new System.Drawing.Point(422, 259);
             this.Puestolabel.Name = "Puestolabel";
             this.Puestolabel.Size = new System.Drawing.Size(52, 16);
             this.Puestolabel.TabIndex = 12;

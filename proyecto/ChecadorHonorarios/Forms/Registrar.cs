@@ -1,4 +1,5 @@
-﻿using ChecadorHonorarios.Models;
+﻿using ChecadorHonorarios.Controllers;
+using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace ChecadorHonorarios
     {
         private DPFP.Template Template;
         private Honorarios_Check_DGTITEntities contexto;
+        private RegistrarUsuarioController RUController;
         public Registrar()
         {
             InitializeComponent();
@@ -98,18 +100,24 @@ namespace ChecadorHonorarios
             try
             {
                 byte[] streamHuella = Template.Bytes;
-                fingerprint fingerprint = new fingerprint()
+              /*  fingerprint fingerprint = new fingerprint()
                 {
                     huella = streamHuella
-                };
-
-                contexto.fingerprints.Add(fingerprint);
-                contexto.SaveChanges();
-                MessageBox.Show("Agregado correctamente");
-                Limpiar();
-                Listar();
-                Template = null;
-                BtnAgregar.Enabled = false;
+                };*/
+                RegistroUsuarioModel.Huella.huella = streamHuella;
+                RUController = new RegistrarUsuarioController();
+                if (RUController.GuardarUsuario2())
+                {
+                    MessageBox.Show("Agregado correctamente");
+                    Limpiar();
+                    Listar();
+                    Template = null;
+                    BtnAgregar.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo agregar el usuario correctamente");
+                }
 
             }
             catch (Exception ex)

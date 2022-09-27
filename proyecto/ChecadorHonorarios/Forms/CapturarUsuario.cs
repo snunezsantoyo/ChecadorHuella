@@ -1,4 +1,6 @@
 ﻿using ChecadorHonorarios.Controllers;
+using ChecadorHonorarios.Data;
+using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +13,11 @@ using System.Windows.Forms;
 
 namespace ChecadorHonorarios.Forms
 {
+
+   
     public partial class CapturarUsuario : Form
     {
-        private RegistrarUsuarioController RUController;
+       // private RegistrarUsuarioController RUController;
         public CapturarUsuario()
         {
             InitializeComponent();
@@ -25,13 +29,23 @@ namespace ChecadorHonorarios.Forms
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            RUController = new RegistrarUsuarioController();
             if (ValidarDatosUsuario())
             {
+                //  RUController = new RegistrarUsuarioController();
+                RegistroUsuarioModel.Usuario.name = Nombretxt.Text;
+                RegistroUsuarioModel.Usuario.lastname = Apellidotxt1.Text;
+                RegistroUsuarioModel.Usuario.lastname2 = Apellidotxt2.Text;
+                RegistroUsuarioModel.Usuario.fullname = String.Format("{0} {1} {2}", Nombretxt.Text, Apellidotxt1.Text, Apellidotxt2.Text);
+                RegistroUsuarioModel.Usuario.email = Correotxt.Text;
+                RegistroUsuarioModel.Usuario.birthday = NacimientoPicker.Value;
+                RegistroUsuarioModel.Usuario.jobPosition = Puestotxt.Text;
 
-                
-              RUController.guardarUsuario(Nombretxt.Text, Apellidotxt1.Text, Apellidotxt2.Text,
-              Correotxt.Text, Puestotxt.Text, NacimientoPicker.Value );
+                //RUController.GuardarUsuario(usuario);
+
+
+                CapturarSchedule formSchedule = new CapturarSchedule();
+                formSchedule.ShowDialog();
+                this.Close();
 
             }
         }
@@ -146,5 +160,7 @@ namespace ChecadorHonorarios.Forms
             NacimientoPicker.Format = DateTimePickerFormat.Short;
             NacimientoPicker.CustomFormat = null;
         }
+
+      
     }
 }
