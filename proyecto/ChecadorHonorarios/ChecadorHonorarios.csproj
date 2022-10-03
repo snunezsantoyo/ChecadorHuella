@@ -72,9 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\LoginAdminController.cs" />
-    <Compile Include="Controllers\RegistrarUsuarioController.cs" />
-    <Compile Include="Data\IRegistroData.cs" />
-    <Compile Include="Data\RegistroData.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Forms\CapturarSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +84,12 @@
     </Compile>
     <Compile Include="Forms\CapturarUsuario.Designer.cs">
       <DependentUpon>CapturarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PortalAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PortalAdmin.Designer.cs">
+      <DependentUpon>PortalAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\administrator.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
@@ -138,11 +142,11 @@
     <Compile Include="Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NewAdmin.cs">
+    <Compile Include="Forms\NuevoAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\NewAdmin.Designer.cs">
-      <DependentUpon>NewAdmin.cs</DependentUpon>
+    <Compile Include="Forms\NuevoAdmin.Designer.cs">
+      <DependentUpon>NuevoAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\RegistroUsuarioModel.cs" />
     <Compile Include="Program.cs" />
@@ -174,14 +178,20 @@
     <EmbeddedResource Include="Forms\CapturarUsuario.resx">
       <DependentUpon>CapturarUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CaptureForm.resx">
+      <DependentUpon>CaptureForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginAdmin.resx">
       <DependentUpon>LoginAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NewAdmin.resx">
-      <DependentUpon>NewAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\NuevoAdmin.resx">
+      <DependentUpon>NuevoAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PortalAdmin.resx">
+      <DependentUpon>PortalAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Verificar.resx">
       <DependentUpon>Verificar.cs</DependentUpon>

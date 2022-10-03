@@ -18,17 +18,6 @@ namespace ChecadorHonorarios
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Inicializar y abrir vista Registrar
-            CapturarUsuario formRegistrar = new CapturarUsuario();
-            formRegistrar.ShowDialog();
-
-            /*
-            Registrar formRegistrar = new Registrar();
-            formRegistrar.ShowDialog();*/
-        }
-
         private void Main_Load(object sender, EventArgs e)
         {
 
@@ -40,6 +29,13 @@ namespace ChecadorHonorarios
             loginAdmin.ShowDialog();
             /*LoginAdmin loginAdmin = new LoginAdmin();
             loginAdmin.ShowDialog();*/
+        }
+
+        private void IniciarSesion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            
+            LoginAdmin nuevaSesion = new LoginAdmin();
+            nuevaSesion.ShowDialog();
         }
     }
 }

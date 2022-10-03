@@ -67,9 +67,20 @@ namespace ChecadorHonorarios
                     UpdateStatus(result.FARAchieved);
                     if (result.Verified)
                     {
-                        MakeReport("The fingerprint was VERIFIED. " + finger.fingerprintID);
+                        var usuario = (from u in contexto.users 
+                                       where u.fingerprintID == finger.fingerprintID
+                                       select u.name).FirstOrDefault();
+
+                        if (string.IsNullOrEmpty(usuario))
+                            MessageBox.Show("El usuario no esta registrado");                                              
+                        else                        
+                            MakeReport("The fingerprint was VERIFIED. " + usuario);                      
+                           
                         break;
                     }
+
+
+
                 }
 
 

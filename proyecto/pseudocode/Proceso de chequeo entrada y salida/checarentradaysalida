@@ -1,0 +1,47 @@
+
+   FUNCTION  Verificar que la huella este registrada en la base de datos (){
+
+        if ( Huella existe = true ){
+            Se guardan la fecha y la hora en la que el usuario ingresa
+            Obtener id de la Huella 
+            Verificar si el usuario que esta checando esta checando entrada o salida
+           FUNCTION  Verificar si es entrada o salida()
+           IF (Si el usuario esta registrando una salida){
+
+           }
+
+        }
+        else {
+
+            Se envia una alerta al usuario para que sepa que no se encontro su huella
+
+        }
+    }
+
+
+    FUNCTION Verificar si es entrada o salida () {
+        En la tabla verifyCheck se busca un registro con los parametros HuellaID y la fecha en la que el usuario 
+        esta intentando checar
+        if (Si existe un registro con estas caracteristicas){
+           * El usuario ya ha checado previamente por lo que estamos registrando una salida
+
+           * Obtener Usuario ID con Huella ID
+
+           * Obtener la hora en la que se realizo la entrada 
+
+           * Se guarda un registro en la tabla verifyCheck en la base de datos usando 
+            HuellaID, fecha en la que checo y hora en la que checo
+
+           * Se guarda un registro en la tabla InandOutHistory en la base de datos usando 
+           Usuario ID, Hora de entrada (correspondiente al registro anterior), Hora de salida (Hora actual),
+           y fecha actual 
+        }
+        else {
+           * El usuario esta intentando hacer su chequeo de entrada
+
+           * Se guarda un registro en la tabla verifyCheck en la base de datos usando 
+            HuellaID, fecha en la que checo y hora en la que checo
+
+           * Se regresa un valor que indica que se esta checando una entrada
+        }
+    }

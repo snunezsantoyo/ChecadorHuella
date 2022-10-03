@@ -1,5 +1,4 @@
 ﻿using ChecadorHonorarios.Controllers;
-using ChecadorHonorarios.Data;
 using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;

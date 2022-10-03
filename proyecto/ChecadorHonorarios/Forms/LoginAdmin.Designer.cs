@@ -36,6 +36,7 @@
             this.emptyUsuario = new System.Windows.Forms.Label();
             this.emptyContraseña = new System.Windows.Forms.Label();
             this.mostrarContraseña = new System.Windows.Forms.Button();
+            this.Instrucciones = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // UsuarioText
@@ -110,11 +111,21 @@
             this.mostrarContraseña.Text = "mostrar";
             this.mostrarContraseña.UseVisualStyleBackColor = true;
             // 
+            // Instrucciones
+            // 
+            this.Instrucciones.AutoSize = true;
+            this.Instrucciones.Location = new System.Drawing.Point(279, 70);
+            this.Instrucciones.Name = "Instrucciones";
+            this.Instrucciones.Size = new System.Drawing.Size(258, 16);
+            this.Instrucciones.TabIndex = 8;
+            this.Instrucciones.Text = "Ingresa las credenciales de administrador";
+            // 
             // LoginAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Instrucciones);
             this.Controls.Add(this.mostrarContraseña);
             this.Controls.Add(this.emptyContraseña);
             this.Controls.Add(this.emptyUsuario);
@@ -141,5 +152,6 @@
         private System.Windows.Forms.Label emptyUsuario;
         private System.Windows.Forms.Label emptyContraseña;
         private System.Windows.Forms.Button mostrarContraseña;
+        private System.Windows.Forms.Label Instrucciones;
     }
 }

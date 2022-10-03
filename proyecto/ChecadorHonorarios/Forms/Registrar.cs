@@ -17,7 +17,7 @@ namespace ChecadorHonorarios
     {
         private DPFP.Template Template;
         private Honorarios_Check_DGTITEntities contexto;
-        private RegistrarUsuarioController RUController;
+        private UsuarioController RUController;
         public Registrar()
         {
             InitializeComponent();
@@ -27,12 +27,7 @@ namespace ChecadorHonorarios
         {
             contexto = new Honorarios_Check_DGTITEntities();
             Listar();
-            
 
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -42,11 +37,11 @@ namespace ChecadorHonorarios
             CapturarHuella capturar = new CapturarHuella();
             capturar.OnTemplate += this.OnTemplate;
             capturar.ShowDialog();
-            
+
 
         }
 
-        private void OnTemplate (DPFP.Template template)
+        private void OnTemplate(DPFP.Template template)
         {
             this.Invoke(new Function(delegate ()
             {
@@ -55,7 +50,6 @@ namespace ChecadorHonorarios
                 if (Template != null)
                 {
                     MessageBox.Show("The fingerprint template is ready for fingerprint verification.", "Fingerprint Enrollment");
-                    txtHuella.Text = "Huella capturada correctamente";
                 }
                 else
                 {
@@ -64,29 +58,31 @@ namespace ChecadorHonorarios
             }));
         }
 
-        private void txtNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Limpiar()
-        {
-            txtNombre.Text = "";
-        }
-
         private void Listar()
         {
             try
             {
-                var fingerprint = from finger in contexto.fingerprints
-                                select new
-                                {
-                                    id = finger.fingerprintID,
-                                   // huella = finger.huella,     
-                                };
-                if (fingerprint != null)
+                var usuario =
+                    from u in contexto.users
+                    join sc in contexto.schedules on u.scheduleID equals sc.scheduleID
+                    join dy in contexto.daysIns on sc.daysInID equals dy.daysInID
+                    select new
+                    {
+                        u.fullname,
+                        u.jobPosition,
+                        sc.timeIn,
+                        sc.timeOut,
+                        dy.monday,
+                        dy.tuesday,
+                        dy.wednesday,
+                        dy.thursday,
+                        dy.friday,
+                        dy.saturday
+                    };
+
+                if (usuario != null)
                 {
-                     DgvListar.DataSource = fingerprint.ToList();
+                    DgvListar.DataSource = usuario.ToList();
                 }
             }
             catch (Exception ex)
@@ -100,16 +96,12 @@ namespace ChecadorHonorarios
             try
             {
                 byte[] streamHuella = Template.Bytes;
-              /*  fingerprint fingerprint = new fingerprint()
-                {
-                    huella = streamHuella
-                };*/
+
                 RegistroUsuarioModel.Huella.huella = streamHuella;
-                RUController = new RegistrarUsuarioController();
-                if (RUController.GuardarUsuario2())
+                RUController = new UsuarioController();
+                if (RUController.GuardarUsuario())
                 {
                     MessageBox.Show("Agregado correctamente");
-                    Limpiar();
                     Listar();
                     Template = null;
                     BtnAgregar.Enabled = false;

@@ -1,4 +1,5 @@
 ﻿using ChecadorHonorarios.Controllers;
+using ChecadorHonorarios.Forms;
 using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,14 @@ namespace ChecadorHonorarios
                 string usuario = UsuarioText.Text;
                 string contraseña = ContraseñaText.Text;
                 LoginAdminController = new LoginAdminController();
-                LoginAdminController.ChecarAdmin(usuario, contraseña);
+                if (LoginAdminController.ChecarAdmin(usuario, contraseña))
+                {
+                    limpiar();
+                    PortalAdmin NuevoPortal = new PortalAdmin();
+                    NuevoPortal.ShowDialog();
+                    this.Hide();
+                }
+              
                 limpiar();
             }
 

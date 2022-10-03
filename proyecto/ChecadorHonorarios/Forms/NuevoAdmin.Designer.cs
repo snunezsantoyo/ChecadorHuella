@@ -1,6 +1,6 @@
 ﻿namespace ChecadorHonorarios
 {
-    partial class NewAdmin
+    partial class NuevoAdmin
     {
         /// <summary>
         /// Required designer variable.

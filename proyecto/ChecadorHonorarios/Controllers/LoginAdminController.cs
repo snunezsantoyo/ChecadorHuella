@@ -1,4 +1,5 @@
-﻿using ChecadorHonorarios.Models;
+﻿using ChecadorHonorarios.Forms;
+using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,9 @@ namespace ChecadorHonorarios.Controllers
        
 
     //Función para checar que el usuario ingresado y la contraseña sean validos 
-        public void ChecarAdmin(string usuario, string contraseña)
+        public bool ChecarAdmin(string usuario, string contraseña)
         {
+            bool ingresar = false;
             try
             {
                 contexto = new Honorarios_Check_DGTITEntities();
@@ -28,14 +30,13 @@ namespace ChecadorHonorarios.Controllers
 
                     if (admin != null)
                     {
-                        MessageBox.Show("Funciona: " + admin.email);
-                        Main main  = new Main();
-                        main.ShowDialog();
+                        //MessageBox.Show("Funciona: " + admin.email);
+                        ingresar = true;
                     }
                     else
                     {
-                        MessageBox.Show("No existen registros");
-                    }
+                        MessageBox.Show("Los datos ingresados son incorrectos!");
+                    }                   
                 }
 
 
@@ -45,6 +46,7 @@ namespace ChecadorHonorarios.Controllers
                 MessageBox.Show(ex.Message);
 
             }
+            return ingresar;
         }
 
     }

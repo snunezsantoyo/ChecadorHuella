@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace ChecadorHonorarios
 {
-    public partial class NewAdmin : Form
+    public partial class NuevoAdmin : Form
     {
         private Honorarios_Check_DGTITEntities contexto;
 
-        public NewAdmin()
+        public NuevoAdmin()
         {
             InitializeComponent();
         }
