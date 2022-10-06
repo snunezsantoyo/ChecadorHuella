@@ -25,10 +25,11 @@ namespace ChecadorHonorarios
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Verificar loginAdmin = new Verificar();
-            loginAdmin.ShowDialog();
-            /*LoginAdmin loginAdmin = new LoginAdmin();
+            PruebasCRUDUsuario prueba = new PruebasCRUDUsuario();
+            prueba.ShowDialog();
+            /*Verificar loginAdmin = new Verificar();
             loginAdmin.ShowDialog();*/
+            
         }
 
         private void IniciarSesion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

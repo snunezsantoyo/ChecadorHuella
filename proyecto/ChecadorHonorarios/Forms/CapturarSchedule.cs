@@ -26,7 +26,7 @@ namespace ChecadorHonorarios.Forms
         private void CapturarSchedule_Load(object sender, EventArgs e)
         {
             FormatoEntradaSalida();
-            InstruccionesLabel.Text = "Selecciona los días laborales para el usuario " + RegistroUsuarioModel.Usuario.name + " :";
+            InstruccionesLabel.Text = "Selecciona los días laborales para el usuario " + UsuarioModel.Usuario.name + " :";
             
 
         }
@@ -55,29 +55,29 @@ namespace ChecadorHonorarios.Forms
                 switch (check)
                 {
                     case "Lunes":
-                        RegistroUsuarioModel.DiasLaborales.monday = true;
+                        UsuarioModel.DiasLaborales.monday = true;
                         break;
                     case "Martes":
-                        RegistroUsuarioModel.DiasLaborales.tuesday = true;
+                        UsuarioModel.DiasLaborales.tuesday = true;
                         break;
                     case "Miercoles":
-                        RegistroUsuarioModel.DiasLaborales.wednesday = true;
+                        UsuarioModel.DiasLaborales.wednesday = true;
                         break;
                     case "Jueves":
-                        RegistroUsuarioModel.DiasLaborales.thursday = true;
+                        UsuarioModel.DiasLaborales.thursday = true;
                         break;
                     case "Viernes":
-                        RegistroUsuarioModel.DiasLaborales.friday = true;
+                        UsuarioModel.DiasLaborales.friday = true;
                         break;
                     case "Sabado":
-                        RegistroUsuarioModel.DiasLaborales.saturday = true;
+                        UsuarioModel.DiasLaborales.saturday = true;
                         break;
                 }
 
             }
-            RegistroUsuarioModel.Horarios.timeIn = new TimeSpan(hours: EntradaPicker.Value.Hour, minutes: EntradaPicker.Value.Minute, seconds: 0);
+            UsuarioModel.Horarios.timeIn = new TimeSpan(hours: EntradaPicker.Value.Hour, minutes: EntradaPicker.Value.Minute, seconds: 0);
             //MessageBox.Show(RegistroUsuarioModel.Horarios.timeIn.ToString());
-            RegistroUsuarioModel.Horarios.timeOut = new TimeSpan(hours: SalidaPicker.Value.Hour, minutes: SalidaPicker.Value.Minute, seconds: 0);
+            UsuarioModel.Horarios.timeOut = new TimeSpan(hours: SalidaPicker.Value.Hour, minutes: SalidaPicker.Value.Minute, seconds: 0);
 
             Registrar formHuella = new Registrar();
             formHuella.ShowDialog();

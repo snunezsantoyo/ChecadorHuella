@@ -18,6 +18,7 @@ namespace ChecadorHonorarios.Models
         public Honorarios_Check_DGTITEntities()
             : base("name=Honorarios_Check_DGTITEntities")
         {
+            Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

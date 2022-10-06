@@ -58,6 +58,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -90,6 +91,12 @@
     </Compile>
     <Compile Include="Forms\PortalAdmin.Designer.cs">
       <DependentUpon>PortalAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PruebasCRUDUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PruebasCRUDUsuario.Designer.cs">
+      <DependentUpon>PruebasCRUDUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\administrator.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
@@ -148,7 +155,7 @@
     <Compile Include="Forms\NuevoAdmin.Designer.cs">
       <DependentUpon>NuevoAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\RegistroUsuarioModel.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\Registrar.cs">
@@ -192,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PortalAdmin.resx">
       <DependentUpon>PortalAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PruebasCRUDUsuario.resx">
+      <DependentUpon>PruebasCRUDUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Verificar.resx">
       <DependentUpon>Verificar.cs</DependentUpon>

@@ -1,8 +1,13 @@
 ﻿using ChecadorHonorarios.Models;
 using System;
+using System.CodeDom;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,30 +33,30 @@ namespace ChecadorHonorarios.Controllers
 
                         try
                         {
-                            contexto.daysIns.Add(RegistroUsuarioModel.DiasLaborales);
+                            contexto.daysIns.Add(UsuarioModel.DiasLaborales);
                             contexto.SaveChanges();
 
-                            short pkdaysIn = RegistroUsuarioModel.DiasLaborales.daysInID;
-                            RegistroUsuarioModel.Horarios.daysInID = pkdaysIn;
+                            short pkdaysIn = UsuarioModel.DiasLaborales.daysInID;
+                            UsuarioModel.Horarios.daysInID = pkdaysIn;
 
 
-                            contexto.schedules.Add(RegistroUsuarioModel.Horarios);
+                            contexto.schedules.Add(UsuarioModel.Horarios);
                             contexto.SaveChanges();
 
 
-                            short pkschedule = RegistroUsuarioModel.Horarios.scheduleID;
+                            short pkschedule = UsuarioModel.Horarios.scheduleID;
 
 
-                            contexto.fingerprints.Add(RegistroUsuarioModel.Huella);
+                            contexto.fingerprints.Add(UsuarioModel.Huella);
                             contexto.SaveChanges();
 
-                            short pkfingerprint = RegistroUsuarioModel.Huella.fingerprintID;
+                            short pkfingerprint = UsuarioModel.Huella.fingerprintID;
 
-                            RegistroUsuarioModel.Usuario.fingerprintID = pkfingerprint;
-                            RegistroUsuarioModel.Usuario.scheduleID = pkschedule;
+                            UsuarioModel.Usuario.fingerprintID = pkfingerprint;
+                            UsuarioModel.Usuario.scheduleID = pkschedule;
 
 
-                            contexto.users.Add(RegistroUsuarioModel.Usuario);
+                            contexto.users.Add(UsuarioModel.Usuario);
                             contexto.SaveChanges();
 
                             dbContextTransaction.Commit();
@@ -77,14 +82,93 @@ namespace ChecadorHonorarios.Controllers
             return guardado;
         }
 
+        public void ValidarUsuario()
+        {
+
+        }
+
+        public user BuscarUsuarioByID(short UsuarioID)
+        {
+            try
+            {
+                if (UsuarioID == 0) throw new Exception("Ingresa un id");
+
+                using (contexto = new Honorarios_Check_DGTITEntities())
+                {
+                    user usuario = (from u in contexto.users
+                                    where u.userID == UsuarioID
+                                    select u).FirstOrDefault<user>();
+
+                    if (usuario == null)
+                        throw new Exception("No se encontraron resultados para tu busqueda");
+
+                    return usuario;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
+        public bool EliminarUsuario(short UsuarioID)
+        {
+
+            bool eliminado;
+            try
+            {
+                if (UsuarioID == 0) throw new Exception("Ingresa un id");
+                using (contexto = new Honorarios_Check_DGTITEntities())
+                {
+                    user usuario = (from u in contexto.users
+                                    where u.userID == UsuarioID
+                                    select u).FirstOrDefault();
+
+                    if (usuario == null)
+                        throw new Exception("No se encontraron resultados para tu busqueda");
+
+                    usuario.deleted = true;
+                    contexto.SaveChanges();
+                    eliminado = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return eliminado;
+        }
+
+        public List<user> ListarUsuarios()
+        {
+            try
+            {
+                using (contexto = new Honorarios_Check_DGTITEntities())
+                {
+                    List<user> lstUsuario = (from u in contexto.users
+                                             select u).ToList();
+                    return lstUsuario;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public void EditarUsuarios()
+        {
+
+        }
     }
 
-}                  
 
- 
-           
-          
+}
 
-          
+
+
+
+
+

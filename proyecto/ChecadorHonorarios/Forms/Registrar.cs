@@ -67,8 +67,7 @@ namespace ChecadorHonorarios
                     join sc in contexto.schedules on u.scheduleID equals sc.scheduleID
                     join dy in contexto.daysIns on sc.daysInID equals dy.daysInID
                     select new
-                    {
-                        u.fullname,
+                    {                       
                         u.jobPosition,
                         sc.timeIn,
                         sc.timeOut,
@@ -97,7 +96,7 @@ namespace ChecadorHonorarios
             {
                 byte[] streamHuella = Template.Bytes;
 
-                RegistroUsuarioModel.Huella.huella = streamHuella;
+                UsuarioModel.Huella.huella = streamHuella;
                 RUController = new UsuarioController();
                 if (RUController.GuardarUsuario())
                 {

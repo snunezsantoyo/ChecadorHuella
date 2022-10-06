@@ -31,13 +31,12 @@ namespace ChecadorHonorarios.Forms
             if (ValidarDatosUsuario())
             {
                 //  RUController = new RegistrarUsuarioController();
-                RegistroUsuarioModel.Usuario.name = Nombretxt.Text;
-                RegistroUsuarioModel.Usuario.lastname = Apellidotxt1.Text;
-                RegistroUsuarioModel.Usuario.lastname2 = Apellidotxt2.Text;
-                RegistroUsuarioModel.Usuario.fullname = String.Format("{0} {1} {2}", Nombretxt.Text, Apellidotxt1.Text, Apellidotxt2.Text);
-                RegistroUsuarioModel.Usuario.email = Correotxt.Text;
-                RegistroUsuarioModel.Usuario.birthday = NacimientoPicker.Value;
-                RegistroUsuarioModel.Usuario.jobPosition = Puestotxt.Text;
+                UsuarioModel.Usuario.name = Nombretxt.Text;
+                UsuarioModel.Usuario.lastname = Apellidotxt1.Text;
+                UsuarioModel.Usuario.lastname2 = Apellidotxt2.Text;
+                UsuarioModel.Usuario.email = Correotxt.Text;
+                UsuarioModel.Usuario.birthday = NacimientoPicker.Value;
+                UsuarioModel.Usuario.jobPosition = Puestotxt.Text;
 
                 //RUController.GuardarUsuario(usuario);
 

@@ -68,9 +68,10 @@
           <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="lastname" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="lastname2" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="fullname" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="jobPosition" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="status" Type="bit" />
         </EntityType>
         <EntityType Name="verifyCheck">
           <Key>
@@ -247,12 +248,13 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lastname2" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="jobPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="fingerprint" Relationship="Self.fkfingerprint" FromRole="users" ToRole="fingerprint" />
           <NavigationProperty Name="inAndOutHistories" Relationship="Self.fkusers" FromRole="users" ToRole="inAndOutHistory" />
           <NavigationProperty Name="schedule" Relationship="Self.fkscheduleID" FromRole="users" ToRole="schedule" />
+          <Property Name="deleted" Type="Boolean" />
+          <Property Name="status" Type="Boolean" />
         </EntityType>
         <EntityType Name="verifyCheck">
           <Key>
@@ -435,6 +437,8 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.user">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
                 <ScalarProperty Name="fingerprintID" ColumnName="fingerprintID" />
@@ -442,7 +446,6 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="lastname2" ColumnName="lastname2" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
                 <ScalarProperty Name="jobPosition" ColumnName="jobPosition" />
                 <ScalarProperty Name="email" ColumnName="email" />
               </MappingFragment>

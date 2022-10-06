@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.fingerprint" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.inAndOutHistory" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.schedule" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.user" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.user" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.verifyCheck" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
         <AssociationConnector Association="Honorarios_Check_DGTITModel.FK__schedule__daysIn__2C3393D0" ManuallyRouted="false" />
         <AssociationConnector Association="Honorarios_Check_DGTITModel.fkfingerprint" ManuallyRouted="false" />

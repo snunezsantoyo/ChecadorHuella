@@ -27,9 +27,10 @@ namespace ChecadorHonorarios.Models
         public string name { get; set; }
         public string lastname { get; set; }
         public string lastname2 { get; set; }
-        public string fullname { get; set; }
         public string jobPosition { get; set; }
         public string email { get; set; }
+        public Nullable<bool> deleted { get; set; }
+        public Nullable<bool> status { get; set; }
     
         public virtual fingerprint fingerprint { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
