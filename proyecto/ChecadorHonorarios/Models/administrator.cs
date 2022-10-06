@@ -15,12 +15,15 @@ namespace ChecadorHonorarios.Models
     public partial class administrator
     {
         public short administratorID { get; set; }
+        public short fingerprintID { get; set; }
         public string admPassword { get; set; }
         public string name { get; set; }
         public string lastname { get; set; }
         public string lastname2 { get; set; }
-        public string fullname { get; set; }
+        public string nickname { get; set; }
         public string email { get; set; }
         public Nullable<bool> addAdmin { get; set; }
+    
+        public virtual fingerprint fingerprint { get; set; }
     }
 }

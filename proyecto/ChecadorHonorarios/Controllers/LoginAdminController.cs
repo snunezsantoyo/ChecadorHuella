@@ -12,9 +12,9 @@ namespace ChecadorHonorarios.Controllers
     internal class LoginAdminController
     {
         private Honorarios_Check_DGTITEntities contexto;
-       
 
-    //Función para checar que el usuario ingresado y la contraseña sean validos 
+
+        //Función para checar que el usuario ingresado y la contraseña sean validos 
         public bool ChecarAdmin(string usuario, string contraseña)
         {
             bool ingresar = false;
@@ -28,15 +28,17 @@ namespace ChecadorHonorarios.Controllers
                     .Where(a => a.email == usuario && a.admPassword == contraseña)
                     .FirstOrDefault();
 
-                    if (admin != null)
-                    {
-                        //MessageBox.Show("Funciona: " + admin.email);
-                        ingresar = true;
-                    }
+                    if (admin != null)  ingresar = true;
                     else
                     {
-                        MessageBox.Show("Los datos ingresados son incorrectos!");
-                    }                   
+                        admin = contexto.administrators
+                        .Where(a => a.nickname == usuario && a.admPassword == contraseña)
+                        .FirstOrDefault();
+
+                        if (admin != null) ingresar = true;
+                        
+                        else throw new Exception("Los datos ingresados son incorrectos!");
+                    }
                 }
 
 

@@ -10,11 +10,12 @@
             <PropertyRef Name="administratorID" />
           </Key>
           <Property Name="administratorID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fingerprintID" Type="smallint" Nullable="false" />
           <Property Name="admPassword" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="lastname" Type="varchar" MaxLength="50" />
           <Property Name="lastname2" Type="varchar" MaxLength="50" />
-          <Property Name="fullname" Type="varchar" MaxLength="100" />
+          <Property Name="nickname" Type="varchar" MaxLength="10" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="addAdmin" Type="bit" />
         </EntityType>
@@ -118,6 +119,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fkfingerprint3">
+          <End Role="fingerprint" Type="Self.fingerprint" Multiplicity="1" />
+          <End Role="administrator" Type="Self.administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fingerprint">
+              <PropertyRef Name="fingerprintID" />
+            </Principal>
+            <Dependent Role="administrator">
+              <PropertyRef Name="fingerprintID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fkscheduleID">
           <End Role="schedule" Type="Self.schedule" Multiplicity="1" />
           <End Role="users" Type="Self.users" Multiplicity="*" />
@@ -174,6 +187,10 @@
             <End Role="fingerprint" EntitySet="fingerprint" />
             <End Role="verifyCheck" EntitySet="verifyCheck" />
           </AssociationSet>
+          <AssociationSet Name="fkfingerprint3" Association="Self.fkfingerprint3">
+            <End Role="fingerprint" EntitySet="fingerprint" />
+            <End Role="administrator" EntitySet="administrator" />
+          </AssociationSet>
           <AssociationSet Name="fkscheduleID" Association="Self.fkscheduleID">
             <End Role="schedule" EntitySet="schedule" />
             <End Role="users" EntitySet="users" />
@@ -212,6 +229,7 @@
           <Property Name="huella" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="users" Relationship="Self.fkfingerprint" FromRole="fingerprint" ToRole="users" />
           <NavigationProperty Name="verifyChecks" Relationship="Self.fkfingerprint2" FromRole="fingerprint" ToRole="verifyCheck" />
+          <NavigationProperty Name="administrators" Relationship="Honorarios_Check_DGTITModel.fkfingerprint3" FromRole="fingerprint" ToRole="administrator" />
         </EntityType>
         <EntityType Name="inAndOutHistory">
           <Key>
@@ -371,20 +389,38 @@
             <End Role="users" EntitySet="users" />
           </AssociationSet>
           <EntitySet Name="administrators" EntityType="Honorarios_Check_DGTITModel.administrator" />
+          <AssociationSet Name="fkfingerprint3" Association="Honorarios_Check_DGTITModel.fkfingerprint3">
+            <End Role="fingerprint" EntitySet="fingerprints" />
+            <End Role="administrator" EntitySet="administrators" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="administrator">
           <Key>
             <PropertyRef Name="administratorID" />
           </Key>
           <Property Name="administratorID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fingerprintID" Type="Int16" Nullable="false" />
           <Property Name="admPassword" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="lastname2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nickname" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="addAdmin" Type="Boolean" />
+          <NavigationProperty Name="fingerprint" Relationship="Honorarios_Check_DGTITModel.fkfingerprint3" FromRole="administrator" ToRole="fingerprint" />
         </EntityType>
+        <Association Name="fkfingerprint3">
+          <End Type="Honorarios_Check_DGTITModel.fingerprint" Role="fingerprint" Multiplicity="1" />
+          <End Type="Honorarios_Check_DGTITModel.administrator" Role="administrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fingerprint">
+              <PropertyRef Name="fingerprintID" />
+            </Principal>
+            <Dependent Role="administrator">
+              <PropertyRef Name="fingerprintID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -466,11 +502,12 @@
               <MappingFragment StoreEntitySet="administrator">
                 <ScalarProperty Name="addAdmin" ColumnName="addAdmin" />
                 <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
                 <ScalarProperty Name="lastname2" ColumnName="lastname2" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="admPassword" ColumnName="admPassword" />
+                <ScalarProperty Name="fingerprintID" ColumnName="fingerprintID" />
                 <ScalarProperty Name="administratorID" ColumnName="administratorID" />
               </MappingFragment>
             </EntityTypeMapping>
