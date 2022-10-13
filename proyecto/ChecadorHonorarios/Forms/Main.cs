@@ -27,6 +27,7 @@ namespace ChecadorHonorarios
         {
             PruebasCRUDUsuario prueba = new PruebasCRUDUsuario();
             prueba.ShowDialog();
+            this.Hide();
             /*Verificar loginAdmin = new Verificar();
             loginAdmin.ShowDialog();*/
             

@@ -24,28 +24,45 @@ namespace ChecadorHonorarios.Forms
             //Se inicializa el DatetimePicker como vacio para posteriormente poder validarlo
             NacimientoPicker.Format = DateTimePickerFormat.Custom;
             NacimientoPicker.CustomFormat = " ";
+            if (UsuarioModel.Editar) LlenarDatos(); 
         }
 
+        public void LlenarDatos()
+        {
+            Nombretxt.Text = UsuarioModel.Usuario.name;
+            Apellidotxt1.Text = UsuarioModel.Usuario.lastname;
+            Apellidotxt2.Text = UsuarioModel.Usuario.lastname2;
+            Correotxt.Text = UsuarioModel.Usuario.email;
+            NacimientoPicker.Value = UsuarioModel.Usuario.birthday;
+            Puestotxt.Text = UsuarioModel.Usuario.jobPosition;
+
+            BtnAgregar.Text = "Editar";
+        }
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            if (ValidarDatosUsuario())
+            if (!UsuarioModel.Editar)
             {
-                //  RUController = new RegistrarUsuarioController();
-                UsuarioModel.Usuario.name = Nombretxt.Text;
-                UsuarioModel.Usuario.lastname = Apellidotxt1.Text;
-                UsuarioModel.Usuario.lastname2 = Apellidotxt2.Text;
-                UsuarioModel.Usuario.email = Correotxt.Text;
-                UsuarioModel.Usuario.birthday = NacimientoPicker.Value;
-                UsuarioModel.Usuario.jobPosition = Puestotxt.Text;
 
-                //RUController.GuardarUsuario(usuario);
+                if (ValidarDatosUsuario())
+                {
+                    //  RUController = new RegistrarUsuarioController();
+                    UsuarioModel.Usuario.name = Nombretxt.Text;
+                    UsuarioModel.Usuario.lastname = Apellidotxt1.Text;
+                    UsuarioModel.Usuario.lastname2 = Apellidotxt2.Text;
+                    UsuarioModel.Usuario.email = Correotxt.Text;
+                    UsuarioModel.Usuario.birthday = NacimientoPicker.Value;
+                    UsuarioModel.Usuario.jobPosition = Puestotxt.Text;
+
+                    //RUController.GuardarUsuario(usuario);
 
 
-                CapturarSchedule formSchedule = new CapturarSchedule();
-                formSchedule.ShowDialog();
-                this.Close();
+                    CapturarSchedule formSchedule = new CapturarSchedule();
+                    formSchedule.ShowDialog();
+                    this.Close();
 
+                }
             }
+            MessageBox.Show("Editar works!");
         }
 
         private bool ValidarDatosUsuario()

@@ -20,8 +20,7 @@ namespace ChecadorHonorarios.Controllers
             bool ingresar = false;
             try
             {
-                contexto = new Honorarios_Check_DGTITEntities();
-                // administrator admin = new administrator();
+                contexto = new Honorarios_Check_DGTITEntities();                
                 using (contexto)
                 {
                     var admin = contexto.administrators

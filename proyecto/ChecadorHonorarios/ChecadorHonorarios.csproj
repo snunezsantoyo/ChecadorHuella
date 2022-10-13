@@ -74,43 +74,43 @@
   <ItemGroup>
     <Compile Include="Controllers\LoginAdminController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="Forms\CapturarSchedule.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CapturarSchedule.Designer.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarSchedule.Designer.cs">
       <DependentUpon>CapturarSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CapturarUsuario.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CapturarUsuario.Designer.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarUsuario.Designer.cs">
       <DependentUpon>CapturarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PortalAdmin.cs">
+    <Compile Include="Forms\PortalAdministrador\PortalAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PortalAdmin.Designer.cs">
+    <Compile Include="Forms\PortalAdministrador\PortalAdmin.Designer.cs">
       <DependentUpon>PortalAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PruebasCRUDUsuario.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\PruebasCRUDUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PruebasCRUDUsuario.Designer.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\PruebasCRUDUsuario.Designer.cs">
       <DependentUpon>PruebasCRUDUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\administrator.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CapturarHuella.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarHuella.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CapturarHuella.Designer.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarHuella.Designer.cs">
       <DependentUpon>CapturarHuella.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CaptureForm.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CaptureForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CaptureForm.Designer.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CaptureForm.Designer.cs">
       <DependentUpon>CaptureForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\daysIn.cs">
@@ -137,10 +137,10 @@
     <Compile Include="Models\inAndOutHistory.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LoginAdmin.cs">
+    <Compile Include="Forms\PortalAdministrador\LoginAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LoginAdmin.Designer.cs">
+    <Compile Include="Forms\PortalAdministrador\LoginAdmin.Designer.cs">
       <DependentUpon>LoginAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Main.cs">
@@ -149,19 +149,19 @@
     <Compile Include="Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NuevoAdmin.cs">
+    <Compile Include="Forms\PortalAdministrador\Admin\NuevoAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\NuevoAdmin.Designer.cs">
+    <Compile Include="Forms\PortalAdministrador\Admin\NuevoAdmin.Designer.cs">
       <DependentUpon>NuevoAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\Registrar.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\Registrar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Registrar.Designer.cs">
+    <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\Registrar.Designer.cs">
       <DependentUpon>Registrar.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\schedule.cs">
@@ -170,40 +170,40 @@
     <Compile Include="Models\user.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Verificar.cs">
+    <Compile Include="Forms\Check\Verificar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Verificar.Designer.cs">
+    <Compile Include="Forms\Check\Verificar.Designer.cs">
       <DependentUpon>Verificar.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\verifyCheck.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\CapturarSchedule.resx">
+    <EmbeddedResource Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarSchedule.resx">
       <DependentUpon>CapturarSchedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CapturarUsuario.resx">
+    <EmbeddedResource Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarUsuario.resx">
       <DependentUpon>CapturarUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CaptureForm.resx">
+    <EmbeddedResource Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CaptureForm.resx">
       <DependentUpon>CaptureForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LoginAdmin.resx">
+    <EmbeddedResource Include="Forms\PortalAdministrador\LoginAdmin.resx">
       <DependentUpon>LoginAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NuevoAdmin.resx">
+    <EmbeddedResource Include="Forms\PortalAdministrador\Admin\NuevoAdmin.resx">
       <DependentUpon>NuevoAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PortalAdmin.resx">
+    <EmbeddedResource Include="Forms\PortalAdministrador\PortalAdmin.resx">
       <DependentUpon>PortalAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PruebasCRUDUsuario.resx">
+    <EmbeddedResource Include="Forms\PortalAdministrador\Usuarios\PruebasCRUDUsuario.resx">
       <DependentUpon>PruebasCRUDUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Verificar.resx">
+    <EmbeddedResource Include="Forms\Check\Verificar.resx">
       <DependentUpon>Verificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -215,7 +215,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\Registrar.resx">
+    <EmbeddedResource Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\Registrar.resx">
       <DependentUpon>Registrar.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Models\fingerprintModel.edmx">

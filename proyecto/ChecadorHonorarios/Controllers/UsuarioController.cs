@@ -1,17 +1,9 @@
-﻿using ChecadorHonorarios.Models;
+﻿using ChecadorHonorarios.Forms;
+using ChecadorHonorarios.Models;
 using System;
-using System.CodeDom;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ChecadorHonorarios.Controllers
 {
@@ -158,9 +150,13 @@ namespace ChecadorHonorarios.Controllers
 
         }
 
-        public void EditarUsuarios()
+        public void EditarUsuarios(short UsuarioID)
         {
 
+            UsuarioModel.Usuario = BuscarUsuarioByID(UsuarioID);
+            UsuarioModel.Editar = true;
+            CapturarUsuario EditarUsuario = new CapturarUsuario();
+            EditarUsuario.ShowDialog();
         }
     }
 

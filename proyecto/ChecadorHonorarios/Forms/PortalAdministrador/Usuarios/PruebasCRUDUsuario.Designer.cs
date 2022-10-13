@@ -30,8 +30,9 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buscar = new System.Windows.Forms.Button();
             this.All = new System.Windows.Forms.Button();
+            this.nuevo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,15 +54,15 @@
             this.dataGridView1.Size = new System.Drawing.Size(680, 188);
             this.dataGridView1.TabIndex = 1;
             // 
-            // button1
+            // buscar
             // 
-            this.button1.Location = new System.Drawing.Point(634, 54);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buscar.Location = new System.Drawing.Point(634, 54);
+            this.buscar.Name = "buscar";
+            this.buscar.Size = new System.Drawing.Size(75, 23);
+            this.buscar.TabIndex = 2;
+            this.buscar.Text = "Buscar";
+            this.buscar.UseVisualStyleBackColor = true;
+            this.buscar.Click += new System.EventHandler(this.Buscar_Click);
             // 
             // All
             // 
@@ -73,17 +74,29 @@
             this.All.UseVisualStyleBackColor = true;
             this.All.Click += new System.EventHandler(this.All_Click);
             // 
+            // nuevo
+            // 
+            this.nuevo.Location = new System.Drawing.Point(634, 124);
+            this.nuevo.Name = "nuevo";
+            this.nuevo.Size = new System.Drawing.Size(75, 26);
+            this.nuevo.TabIndex = 4;
+            this.nuevo.Text = "Nuevo";
+            this.nuevo.UseVisualStyleBackColor = true;
+            this.nuevo.Click += new System.EventHandler(this.Nuevo_Click);
+            // 
             // PruebasCRUDUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.nuevo);
             this.Controls.Add(this.All);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buscar);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
             this.Name = "PruebasCRUDUsuario";
             this.Text = "PruebasCRUDUsuario";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -94,7 +107,8 @@
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buscar;
         private System.Windows.Forms.Button All;
+        private System.Windows.Forms.Button nuevo;
     }
 }

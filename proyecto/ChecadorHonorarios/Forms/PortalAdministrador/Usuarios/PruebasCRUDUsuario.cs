@@ -1,20 +1,8 @@
 ﻿using ChecadorHonorarios.Controllers;
 using ChecadorHonorarios.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace ChecadorHonorarios.Forms
 {
@@ -33,13 +21,12 @@ namespace ChecadorHonorarios.Forms
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Buscar_Click(object sender, EventArgs e)
         {
             
 
             try
-            {
-                
+            {               
                 short id = Convert.ToInt16(textBox1.Text);
                 UController = new UsuarioController();
 
@@ -48,15 +35,11 @@ namespace ChecadorHonorarios.Forms
                 Limpiar();
                 lstusuarios.Add(usuario);
                 dataGridView1.DataSource = lstusuarios;
-                CrearBotones();
-                
-
-
+                CrearBotones();               
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                
+                MessageBox.Show(ex.Message);               
             }
             
         }
@@ -70,9 +53,6 @@ namespace ChecadorHonorarios.Forms
                 Limpiar();
                 dataGridView1.DataSource = lstusuarios;
                 CrearBotones();
-                
-
-
             }
             catch (Exception ex)
             {
@@ -85,7 +65,19 @@ namespace ChecadorHonorarios.Forms
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns[editar.Name].Index)
-                MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()); 
+            {
+                MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                UController = new UsuarioController();
+                UController.EditarUsuarios(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));               
+            }
+                
+               
+            if (e.ColumnIndex == dataGridView1.Columns[eliminar.Name].Index)
+                UController.EliminarUsuario(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));
+
+
+
+
         }
 
         private void CrearBotones()
@@ -108,6 +100,13 @@ namespace ChecadorHonorarios.Forms
         private void Limpiar()
         {
             dataGridView1.Columns.Clear();
+        }
+
+        private void Nuevo_Click(object sender, EventArgs e)
+        {
+            CapturarUsuario nuevo = new CapturarUsuario();
+            nuevo.ShowDialog();
+            
         }
     }
 }

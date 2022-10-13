@@ -61,6 +61,7 @@
             this.Controls.Add(this.IniciarSesion);
             this.Controls.Add(this.BtnVerificar);
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Main";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
