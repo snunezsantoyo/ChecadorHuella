@@ -68,7 +68,7 @@ namespace ChecadorHonorarios.Forms
             {
                 MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 UController = new UsuarioController();
-                UController.EditarUsuarios(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));               
+                UController.HabilitarEditarUsuarios(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));               
             }
                 
                

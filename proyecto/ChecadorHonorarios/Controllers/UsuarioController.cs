@@ -103,6 +103,78 @@ namespace ChecadorHonorarios.Controllers
             }
         }
 
+        public schedule BuscarScheduleByID(short scheduleID)
+        {
+            try
+            {
+                if (scheduleID == 0) throw new Exception("Ingresa un id");
+
+                using (contexto = new Honorarios_Check_DGTITEntities())
+                {
+                    schedule horario = (from sch in contexto.schedules
+                                    where sch.scheduleID == scheduleID
+                                    select sch).FirstOrDefault<schedule>();
+
+                    if (horario == null)
+                        throw new Exception("No se encontraron resultados para tu busqueda");
+
+                    return horario;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public daysIn BuscarDiasByID(short diasID)
+        {
+            try
+            {
+                if (diasID == 0) throw new Exception("Ingresa un id");
+
+                using (contexto = new Honorarios_Check_DGTITEntities())
+                {
+                    daysIn dias = (from d in contexto.daysIns
+                                          where d.daysInID == diasID
+                                          select d).FirstOrDefault<daysIn>();
+
+                    if (dias == null)
+                        throw new Exception("No se encontraron resultados para tu busqueda");
+
+                    return dias;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public fingerprint BuscarHuellaByID(short huellaID)
+        {
+            try
+            {
+                if (huellaID == 0) throw new Exception("Ingresa un id");
+
+                using (contexto = new Honorarios_Check_DGTITEntities())
+                {
+                    fingerprint huella = (from h in contexto.fingerprints
+                                        where h.fingerprintID == huellaID
+                                        select h).FirstOrDefault<fingerprint>();
+
+                    if (huella == null)
+                        throw new Exception("No se encontraron resultados para tu busqueda");
+
+                    return huella;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
 
         public bool EliminarUsuario(short UsuarioID)
         {
@@ -150,14 +222,23 @@ namespace ChecadorHonorarios.Controllers
 
         }
 
-        public void EditarUsuarios(short UsuarioID)
+        public void HabilitarEditarUsuarios(short UsuarioID)
         {
-
             UsuarioModel.Usuario = BuscarUsuarioByID(UsuarioID);
+            UsuarioModel.Huella = BuscarHuellaByID(UsuarioModel.Usuario.fingerprintID);
+            UsuarioModel.Horarios = BuscarScheduleByID(UsuarioModel.Usuario.scheduleID);
+            UsuarioModel.DiasLaborales = BuscarDiasByID(UsuarioModel.Horarios.daysInID);
+
             UsuarioModel.Editar = true;
             CapturarUsuario EditarUsuario = new CapturarUsuario();
             EditarUsuario.ShowDialog();
         }
+
+        public void EditarUsuarios()
+        {
+
+        }
+
     }
 
 

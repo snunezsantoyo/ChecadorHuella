@@ -40,11 +40,11 @@ namespace ChecadorHonorarios.Forms
         }
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            if (!UsuarioModel.Editar)
-            {
+           
+            
 
                 if (ValidarDatosUsuario())
-                {
+                {                       
                     //  RUController = new RegistrarUsuarioController();
                     UsuarioModel.Usuario.name = Nombretxt.Text;
                     UsuarioModel.Usuario.lastname = Apellidotxt1.Text;
@@ -61,8 +61,10 @@ namespace ChecadorHonorarios.Forms
                     this.Close();
 
                 }
-            }
-            MessageBox.Show("Editar works!");
+            
+
+            
+            
         }
 
         private bool ValidarDatosUsuario()
@@ -120,7 +122,6 @@ namespace ChecadorHonorarios.Forms
             NombreVLabel.ForeColor = Color.Red;
             NombreVLabel.Text = "Este campo es obligatorio";
             NombreVLabel.Visible = true;
-
         }
 
         private void PaternoVacio()
