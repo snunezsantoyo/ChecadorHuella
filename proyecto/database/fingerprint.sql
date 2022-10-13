@@ -63,12 +63,15 @@ create table inAndOutHistory(
 
 create table administrator (
     administratorID smallint not null identity(1,1) primary key,
+    fingerprintID smallint not null,
     admPassword varchar (100) not null,
     name varchar (50) not null,
     lastname varchar (50),
     lastname2 varchar (50),
-    fullname varchar (100),
+    nickname varchar (10),
     email varchar (50) not null,
-    addAdmin bit default 0
+    addAdmin bit default 0,
+    constraint fkfingerprint3 FOREIGN KEY (fingerprintID) REFERENCES fingerprint(fingerprintID)
+
 );
 
