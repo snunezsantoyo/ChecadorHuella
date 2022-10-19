@@ -251,6 +251,7 @@
             this.Controls.Add(this.Apellidotxt1);
             this.Controls.Add(this.Nombretxt);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CapturarUsuario";
             this.Text = "CapturarUsuario";
             this.Load += new System.EventHandler(this.CapturarUsuario_Load);

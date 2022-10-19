@@ -29,5 +29,10 @@ namespace ChecadorHonorarios.Forms
             CapturarUsuario formRegistrar = new CapturarUsuario();
             formRegistrar.ShowDialog();
         }
+
+        private void PortalAdmin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

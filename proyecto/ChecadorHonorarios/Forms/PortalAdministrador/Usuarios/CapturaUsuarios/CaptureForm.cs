@@ -74,6 +74,7 @@ namespace ChecadorHonorarios
             {
                 if (UsuarioModel.Verificar)
                 {
+                    bool existe = false;
                     Verification.Result result = new Verification.Result();
 
                     DPFP.Template template = new DPFP.Template();
@@ -87,17 +88,21 @@ namespace ChecadorHonorarios
                         Verificator.Verify(features, template, ref result);
                         if (result.Verified)
                         {
-                            var usuario = (from u in contexto.users
+                            string usuario = (from u in contexto.users
                                            where u.fingerprintID == finger.fingerprintID
                                            select u.name).FirstOrDefault();
 
                             if (!string.IsNullOrEmpty(usuario))
-                                MessageBox.Show("The fingerprint was VERIFIED. " + usuario);
-                                                      
-                            break;
+                            {
+                                MessageBox.Show("El usuario ha sido verificado " + usuario);
+                                existe = true;
+                                break;
+                            }
+                                                                                                                         
                         }
                     }
-                    MessageBox.Show("El usuario no esta registrado");
+                    if (!existe) MessageBox.Show("Usuario no encontrado, por favor intente de nuevo");
+                    
                 }
                 else
                 {

@@ -72,6 +72,7 @@
             this.Controls.Add(this.button1);
             this.Name = "PortalAdmin";
             this.Text = "PortalAdmin";
+            this.Load += new System.EventHandler(this.PortalAdmin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

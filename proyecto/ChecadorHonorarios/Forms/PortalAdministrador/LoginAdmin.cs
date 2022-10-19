@@ -70,9 +70,10 @@ namespace ChecadorHonorarios
                 if (LoginAdminController.ChecarAdmin(usuario, contraseña))
                 {
                     limpiar();
-                    PortalAdmin NuevoPortal = new PortalAdmin();
+                     PrincipalAdmin NuevoPortal = new PrincipalAdmin();
                     NuevoPortal.ShowDialog();
                     this.Hide();
+
                 }
               
                 limpiar();

@@ -74,6 +74,12 @@
   <ItemGroup>
     <Compile Include="Controllers\LoginAdminController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Forms\PortalAdministrador\PrincipalAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PortalAdministrador\PrincipalAdmin.Designer.cs">
+      <DependentUpon>PrincipalAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     <Compile Include="Models\verifyCheck.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\PortalAdministrador\PrincipalAdmin.resx">
+      <DependentUpon>PrincipalAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarSchedule.resx">
       <DependentUpon>CapturarSchedule.cs</DependentUpon>
     </EmbeddedResource>
