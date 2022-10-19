@@ -36,19 +36,22 @@ namespace ChecadorHonorarios.Forms
             Agregar.Text = "Editar";
             string entrada = UsuarioModel.Horarios.timeIn.Value.Hours.ToString() + ":"
                 + UsuarioModel.Horarios.timeOut.Value.Minutes.ToString();
+
             EntradaPicker.Value = Convert.ToDateTime(entrada);
+
             string salida = UsuarioModel.Horarios.timeOut.Value.Hours.ToString() + ":"
                 + UsuarioModel.Horarios.timeOut.Value.Minutes.ToString();
+
             SalidaPicker.Value = Convert.ToDateTime(salida);
 
-                         
+
             scheduleList.SetItemChecked(0, UsuarioModel.DiasLaborales.monday.Value);
             scheduleList.SetItemChecked(1, UsuarioModel.DiasLaborales.tuesday.Value);
             scheduleList.SetItemChecked(2, UsuarioModel.DiasLaborales.wednesday.Value);
             scheduleList.SetItemChecked(3, UsuarioModel.DiasLaborales.thursday.Value);
             scheduleList.SetItemChecked(4, UsuarioModel.DiasLaborales.friday.Value);
             scheduleList.SetItemChecked(5, UsuarioModel.DiasLaborales.saturday.Value);
-            Agregar.Text = "Editar";
+            
         }
 
 

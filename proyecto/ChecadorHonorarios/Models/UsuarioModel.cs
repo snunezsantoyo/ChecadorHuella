@@ -9,6 +9,7 @@ namespace ChecadorHonorarios.Models
     public static class UsuarioModel
     {
         private static bool editar;
+        private static bool verificar;
         
         /*Esta clase estatica se utiliza para guardar los datos de un nuevo usuario */
 
@@ -18,6 +19,7 @@ namespace ChecadorHonorarios.Models
         public static schedule Horarios { get; set; } = new schedule();
 
         public static bool Editar { get; set; } = editar;
+        public static bool Verificar { get; set; } = verificar;
         
 
     }

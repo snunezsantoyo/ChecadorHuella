@@ -1,4 +1,5 @@
 ﻿using ChecadorHonorarios.Forms;
+using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,11 +26,12 @@ namespace ChecadorHonorarios
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            PruebasCRUDUsuario prueba = new PruebasCRUDUsuario();
-            prueba.ShowDialog();
+            /*PruebasCRUDUsuario prueba = new PruebasCRUDUsuario();
+            prueba.ShowDialog();*/
             this.Hide();
-            /*Verificar loginAdmin = new Verificar();
-            loginAdmin.ShowDialog();*/
+            UsuarioModel.Verificar = true;
+            CaptureForm checar = new CaptureForm();
+            checar.ShowDialog();
             
         }
 

@@ -33,8 +33,8 @@ namespace ChecadorHonorarios
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            CapturarHuella capturar = new CapturarHuella();
+            UsuarioModel.Verificar = false;
+            CaptureForm capturar = new CaptureForm();
             capturar.OnTemplate += this.OnTemplate;
             capturar.ShowDialog();
 
