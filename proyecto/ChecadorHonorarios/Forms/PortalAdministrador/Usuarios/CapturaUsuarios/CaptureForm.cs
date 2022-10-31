@@ -1,4 +1,5 @@
 using ChecadorHonorarios.Models;
+using ChecadorHonorarios.Controllers;
 using DPFP.Verification;
 using System;
 using System.Drawing;
@@ -6,6 +7,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Data;
 using System.Linq;
+
+
 
 namespace ChecadorHonorarios
 {
@@ -16,19 +19,35 @@ namespace ChecadorHonorarios
 
     public partial class CaptureForm : Form, DPFP.Capture.EventHandler
     {
+        #region variables :
+
         //Variables globales
         private DPFP.Capture.Capture Capturer;
         //Variables Verificacion 
-        private DPFP.Template Template;
+        //private DPFP.Template Template;
         private DPFP.Verification.Verification Verificator;
         private Honorarios_Check_DGTITEntities contexto;
         //Variables Registrar
         public delegate void OnTemplateEventHandler(DPFP.Template template);
         public event OnTemplateEventHandler OnTemplate;
         private DPFP.Processing.Enrollment Enroller;
+        DPFP.FeatureSet features;
+        bool existe;
+        int contador = 0;
+
+        #endregion
+
         public CaptureForm()
         {
             InitializeComponent();
+            panel_Registrar.Visible = false;
+            if (!UsuarioModel.Verificar)
+            {           
+                panelTitulo.Visible = false;
+                panel_Registrar.Visible = true;
+                timer.Enabled = false;
+            }
+            
         }
 
         protected virtual void Init()
@@ -63,18 +82,23 @@ namespace ChecadorHonorarios
         {
             // Show number of samples needed.
             MessageBox.Show(String.Format("Fingerprint samples needed: {0}", Enroller.FeaturesNeeded));
+            
         }
         protected virtual void Process(DPFP.Sample Sample)
         {
             // Draw fingerprint sample image.
             ConvertSampleToBitmap(Sample);
             // Process the sample and create a feature set for the enrollment purpose.
-            DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
-            if (features != null)
+
+
+
+            if (UsuarioModel.Verificar)
             {
-                if (UsuarioModel.Verificar)
+                features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
+                if (features != null)
                 {
-                    bool existe = false;
+
+                   
                     Verification.Result result = new Verification.Result();
 
                     DPFP.Template template = new DPFP.Template();
@@ -88,23 +112,30 @@ namespace ChecadorHonorarios
                         Verificator.Verify(features, template, ref result);
                         if (result.Verified)
                         {
-                            string usuario = (from u in contexto.users
-                                           where u.fingerprintID == finger.fingerprintID
-                                           select u.name).FirstOrDefault();
-
-                            if (!string.IsNullOrEmpty(usuario))
+                            using (contexto = new Honorarios_Check_DGTITEntities())
                             {
-                                MessageBox.Show("El usuario ha sido verificado " + usuario);
-                                existe = true;
-                                break;
+                                user usuario = (from u in contexto.users
+                                                        where u.fingerprintID == finger.fingerprintID
+                                                        select u).FirstOrDefault();
+
+                                if (usuario != null)
+                                {
+                                    MakeReport();
+                                    UsuarioModel.Usuario = usuario;
+                                    existe = true;
+                                    break;
+                                }
                             }
-                                                                                                                         
                         }
                     }
-                    if (!existe) MessageBox.Show("Usuario no encontrado, por favor intente de nuevo");
                     
+
                 }
-                else
+            }
+            else
+            {
+                features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Enrollment);
+                if (features != null)
                 {
                     try
                     {
@@ -122,6 +153,7 @@ namespace ChecadorHonorarios
                                 OnTemplate(Enroller.Template);
                                 // SetPrompt("Click Close, and then click Fingerprint Verification.");
                                 Stop();
+                                PrincipalAdminController.HideForm = true;                                
                                 break;
 
                             case DPFP.Processing.Enrollment.Status.Failed:  // report failure and restart capturing
@@ -129,12 +161,13 @@ namespace ChecadorHonorarios
                                 Stop();
                                 UpdateStatus();
                                 OnTemplate(null);
-                                Start();
+                                Start();                              
                                 break;
                         }
                     }
                 }
             }
+            
         }
 
         protected void Start()
@@ -167,14 +200,54 @@ namespace ChecadorHonorarios
             }
         }
 
+        #region Form delegate:
+
+        protected void Cerrar()
+        {
+            this.Invoke(new Function(delegate () {
+                continuar.Enabled = true; 
+            }));
+        }
+            
+       
+        protected void MakeReport()
+        {
+            this.Invoke(new Function(delegate () {                
+                if (existe)
+                {                 
+                    lbl_Respuesta.Text = ("El usuario ha sido verificado " + UsuarioModel.Usuario.name);
+                    img_respuesta.Size = Properties.Resources.huella_valida.Size;
+                    img_respuesta.Image = Properties.Resources.huella_valida;
+                    img_respuesta.Refresh();
+                }
+                else
+                {
+                    lbl_Respuesta.Text = ("Usuario no encontrado, por favor intente de nuevo");
+                    img_respuesta.Size = Properties.Resources.huella_no_valida.Size;
+                    img_respuesta.Image = Properties.Resources.huella_no_valida;
+                    img_respuesta.Refresh();                    
+                }
+                img_respuesta.Visible = true;
+                lbl_Respuesta.Visible = true;
+            }));
+        }
+        #endregion
+
         #region Form Event Handlers:
 
         private void CaptureForm_Load(object sender, EventArgs e)
         {
+            //FullScreen_Bouns();
             Init();
-            Start();                                                // Start capture operation.
+            Start();                                                // Start capture operation.         
         }
-
+        
+        private void FullScreen_Bouns()
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Bounds = Screen.PrimaryScreen.Bounds;
+        }
         private void CaptureForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Stop();
@@ -188,9 +261,13 @@ namespace ChecadorHonorarios
             //MakeReport("La muestra ha sido capturada");
             //SetPrompt("Escanea tu misma huella otra vez");
             Process(Sample);
-        }
 
-        public void OnFingerGone(object Capture, string ReaderSerialNumber)
+            if (PrincipalAdminController.HideForm) Cerrar();
+
+        }
+        
+
+                public void OnFingerGone(object Capture, string ReaderSerialNumber)
         {
             //MakeReport("La huella fue removida del lector");
         }
@@ -239,7 +316,45 @@ namespace ChecadorHonorarios
                 return null;
         }
 
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        private void Actualizar_Reloj(object sender, EventArgs e)
+        {
+            lbl_Hora_Min.Text = DateTime.Now.ToString("HH:mm");
+            lbl_segundos.Text = DateTime.Now.ToString("ss");
+            lbl_fecha.Text = DateTime.Now.ToString("d MMMM yyyy");
+            lbl_dia.Text = DateTime.Now.ToString("dddd"); 
 
+            if (contador > 3)
+            {
+                
+                if (lbl_Respuesta.Visible)
+                {
+                    lbl_Respuesta.Visible = false;
+                    img_respuesta.Visible = false;  
+                }
+                contador = 0;
+            }
+            if (lbl_Respuesta.Visible) contador++;
+
+        }
+
+        private void CaptureForm_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void panel_Registrar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void continuar_Click(object sender, EventArgs e)
+        {
+
+            Close();
+        }
     }
 }

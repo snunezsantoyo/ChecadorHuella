@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;       //Librería para arrastrar la ventana
 using System.Windows.Forms;
 
 namespace ChecadorHonorarios
@@ -29,15 +30,19 @@ namespace ChecadorHonorarios
 
            //Checa si el boton mostrar contraseña esta siendo presionado
 
-            mostrarContraseña.MouseDown += (sender, args) =>
+            visibleOff.MouseDown += (sender, args) =>
             {
                 //En caso de que este siendo presionado muestra la contraseña
+                visibleOn.Visible = true;
+                visibleOff.Visible = false;
                 ContraseñaText.PasswordChar = '\0';
             };
 
-            mostrarContraseña.MouseUp += (sender, args) =>
+            visibleOff.MouseUp += (sender, args) =>
             {
-               //Cuando deja de ser presioando la vuelve a ocultar
+                visibleOn.Visible = false;
+                visibleOff.Visible = true;
+                //Cuando deja de ser presioando la vuelve a ocultar
                 ContraseñaText.PasswordChar = '*';
             };
 
@@ -48,15 +53,15 @@ namespace ChecadorHonorarios
         {
 
             //Validar que los campos usuario y contraseña no esten vacios
-        if (UsuarioText.Text == "" || ContraseñaText.Text == "")
+        if (UsuarioText.Text == "" || ContraseñaText.Text == "" || UsuarioText.Text == "Usuario" || ContraseñaText.Text == "Contraseña")
             {
-                if (UsuarioText.Text == "")
+                if (UsuarioText.Text == "" || UsuarioText.Text == "Usuario")
                 {                  
                     UsuarioVacio();
                 }
                     else emptyUsuario.Visible = false;
 
-                if (ContraseñaText.Text == "")
+                if (ContraseñaText.Text == "" || ContraseñaText.Text == "Contraseña")
                 {               
                     ContraseñaVacio();
                 }
@@ -69,10 +74,11 @@ namespace ChecadorHonorarios
                 LoginAdminController = new LoginAdminController();
                 if (LoginAdminController.ChecarAdmin(usuario, contraseña))
                 {
+                    this.Hide();
                     limpiar();
                      PrincipalAdmin NuevoPortal = new PrincipalAdmin();
                     NuevoPortal.ShowDialog();
-                    this.Hide();
+                    this.Close();
 
                 }
               
@@ -111,6 +117,60 @@ namespace ChecadorHonorarios
             emptyContraseña.Visible = false;
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void RealeaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void panelTitulo_MouseDown(object sender, MouseEventArgs e)
+        {
+            RealeaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+    
+        private void UsuarioText_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (UsuarioText.Text == "Usuario") UsuarioText.Clear();
+            emptyUsuario.Visible = false;
+        }
+
+        private void ContraseñaText_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (ContraseñaText.Text == "Contraseña")
+            {
+                ContraseñaText.Clear();
+                ContraseñaText.PasswordChar = '*';
+            }
+            emptyContraseña.Visible = false;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void pictureHuella_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            UsuarioModel.Verificar = true;
+            CaptureForm checar = new CaptureForm();
+            checar.ShowDialog();
+            this.Close();
+        }
+
+        private void ContraseñaText_Enter(object sender, EventArgs e)
+        {
+            if (ContraseñaText.Text == "Contraseña")
+            {
+                ContraseñaText.Clear();
+                ContraseñaText.PasswordChar = '*';
+            }
+            emptyContraseña.Visible = false;
+        }
     }
 }

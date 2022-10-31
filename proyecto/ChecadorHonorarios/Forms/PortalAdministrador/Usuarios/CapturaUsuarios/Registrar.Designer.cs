@@ -73,9 +73,11 @@
             this.Controls.Add(this.DgvListar);
             this.Controls.Add(this.BtnAgregar);
             this.Controls.Add(this.BtnRegistrar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Registrar";
             this.Text = "Registrar";
             this.Load += new System.EventHandler(this.Registrar_Load);
+            this.VisibleChanged += new System.EventHandler(this.Registrar_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.DgvListar)).EndInit();
             this.ResumeLayout(false);
 

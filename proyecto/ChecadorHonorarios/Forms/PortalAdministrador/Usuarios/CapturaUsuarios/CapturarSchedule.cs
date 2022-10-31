@@ -107,10 +107,9 @@ namespace ChecadorHonorarios.Forms
             UsuarioModel.Horarios.timeIn = new TimeSpan(hours: EntradaPicker.Value.Hour, minutes: EntradaPicker.Value.Minute, seconds: 0);
             //MessageBox.Show(RegistroUsuarioModel.Horarios.timeIn.ToString());
             UsuarioModel.Horarios.timeOut = new TimeSpan(hours: SalidaPicker.Value.Hour, minutes: SalidaPicker.Value.Minute, seconds: 0);
-
-            Registrar formHuella = new Registrar();
-            formHuella.ShowDialog();
+            PrincipalAdminController.CambioInfo_Cerrar = new Registrar();
             this.Close();
+            
         }
 
         public void DefaultFalso()

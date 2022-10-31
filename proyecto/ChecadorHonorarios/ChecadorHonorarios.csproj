@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\LoginAdminController.cs" />
+    <Compile Include="Controllers\PrincipalAdminController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Forms\PortalAdministrador\PrincipalAdmin.cs">
       <SubType>Form</SubType>
@@ -208,6 +209,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\Registrar.resx">
       <DependentUpon>Registrar.cs</DependentUpon>
@@ -247,6 +249,8 @@
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
       <LastGenOutput>fingerprintModel.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\huella_no_valida.png" />
+    <None Include="Resources\huella_valida.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -18,7 +18,8 @@ namespace ChecadorHonorarios.Forms
 
             InitializeComponent();
             dataGridView1.CellClick += dataGridView1_CellClick;
-            
+
+       
         }
 
         private void Buscar_Click(object sender, EventArgs e)
@@ -64,17 +65,16 @@ namespace ChecadorHonorarios.Forms
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+               
+            if (e.ColumnIndex == dataGridView1.Columns[eliminar.Name].Index)
+                UController.EliminarUsuario(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));
             if (e.ColumnIndex == dataGridView1.Columns[editar.Name].Index)
             {
                 MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                 UController = new UsuarioController();
-                UController.HabilitarEditarUsuarios(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));               
+                UController.HabilitarEditarUsuarios(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));
+                this.Close();
             }
-                
-               
-            if (e.ColumnIndex == dataGridView1.Columns[eliminar.Name].Index)
-                UController.EliminarUsuario(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));
-
 
 
 

@@ -38,8 +38,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnOtro = new System.Windows.Forms.Button();
-            this.btnUsuarios = new System.Windows.Forms.Button();
+            this.btnVer = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -82,7 +82,6 @@
             this.btnRestaurar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnRestaurar.TabIndex = 3;
             this.btnRestaurar.TabStop = false;
-            this.btnRestaurar.Visible = false;
             this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
             // 
             // btnMinimizar
@@ -111,6 +110,7 @@
             this.btnMaximizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnMaximizar.TabIndex = 1;
             this.btnMaximizar.TabStop = false;
+            this.btnMaximizar.Visible = false;
             this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
             // 
             // btnCerrar
@@ -145,8 +145,8 @@
             this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.panel2);
-            this.panel3.Controls.Add(this.btnOtro);
-            this.panel3.Controls.Add(this.btnUsuarios);
+            this.panel3.Controls.Add(this.btnVer);
+            this.panel3.Controls.Add(this.btnAgregar);
             this.panel3.Controls.Add(this.pictureBox2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
@@ -173,38 +173,39 @@
             this.panel2.Size = new System.Drawing.Size(7, 48);
             this.panel2.TabIndex = 2;
             // 
-            // btnOtro
+            // btnVer
             // 
-            this.btnOtro.FlatAppearance.BorderSize = 0;
-            this.btnOtro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnOtro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOtro.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOtro.Image = ((System.Drawing.Image)(resources.GetObject("btnOtro.Image")));
-            this.btnOtro.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOtro.Location = new System.Drawing.Point(4, 326);
-            this.btnOtro.Margin = new System.Windows.Forms.Padding(4);
-            this.btnOtro.Name = "btnOtro";
-            this.btnOtro.Size = new System.Drawing.Size(289, 48);
-            this.btnOtro.TabIndex = 1;
-            this.btnOtro.Text = "Otro";
-            this.btnOtro.UseVisualStyleBackColor = true;
+            this.btnVer.FlatAppearance.BorderSize = 0;
+            this.btnVer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnVer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVer.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVer.Image = ((System.Drawing.Image)(resources.GetObject("btnVer.Image")));
+            this.btnVer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVer.Location = new System.Drawing.Point(4, 326);
+            this.btnVer.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVer.Name = "btnVer";
+            this.btnVer.Size = new System.Drawing.Size(289, 48);
+            this.btnVer.TabIndex = 1;
+            this.btnVer.Text = "Ver Usuarios";
+            this.btnVer.UseVisualStyleBackColor = true;
+            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
             // 
-            // btnUsuarios
+            // btnAgregar
             // 
-            this.btnUsuarios.FlatAppearance.BorderSize = 0;
-            this.btnUsuarios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUsuarios.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuarios.Image")));
-            this.btnUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUsuarios.Location = new System.Drawing.Point(4, 279);
-            this.btnUsuarios.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(289, 48);
-            this.btnUsuarios.TabIndex = 1;
-            this.btnUsuarios.Text = "Usuarios";
-            this.btnUsuarios.UseVisualStyleBackColor = true;
-            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
+            this.btnAgregar.FlatAppearance.BorderSize = 0;
+            this.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregar.Location = new System.Drawing.Point(4, 279);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(289, 48);
+            this.btnAgregar.TabIndex = 1;
+            this.btnAgregar.Text = "Agregar Usuarios";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
             // pictureBox2
             // 
@@ -246,6 +247,7 @@
             this.panelContenedor.Name = "panelContenedor";
             this.panelContenedor.Size = new System.Drawing.Size(1440, 753);
             this.panelContenedor.TabIndex = 2;
+            this.panelContenedor.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.panelContenedor_ControlRemoved);
             // 
             // PrincipalAdmin
             // 
@@ -260,6 +262,7 @@
             this.Name = "PrincipalAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.BarraTitulo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnRestaurar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).EndInit();
@@ -287,9 +290,9 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnOtro;
+        private System.Windows.Forms.Button btnVer;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button btnUsuarios;
+        private System.Windows.Forms.Button btnAgregar;
     }
 }
 

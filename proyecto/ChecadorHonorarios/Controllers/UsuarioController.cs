@@ -230,8 +230,7 @@ namespace ChecadorHonorarios.Controllers
             UsuarioModel.DiasLaborales = BuscarDiasByID(UsuarioModel.Horarios.daysInID);
 
             UsuarioModel.Editar = true;
-            CapturarUsuario EditarUsuario = new CapturarUsuario();
-            EditarUsuario.ShowDialog();
+            PrincipalAdminController.CambioInfo_Cerrar = new CapturarUsuario();
         }
 
         public void EditarUsuarios()

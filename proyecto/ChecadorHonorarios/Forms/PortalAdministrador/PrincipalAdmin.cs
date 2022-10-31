@@ -9,16 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;       //Librería para arrastrar la ventana
 using ChecadorHonorarios.Forms;
+using ChecadorHonorarios.Controllers;
+using ChecadorHonorarios.Models;
 
 namespace ChecadorHonorarios
 {
 
-    
+
     public partial class PrincipalAdmin : Form
     {
         public PrincipalAdmin()
         {
             InitializeComponent();
+
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -61,18 +64,92 @@ namespace ChecadorHonorarios
 
         private void MostrarContenido(Object fH)
         {
-            if (this.panelContenedor.Controls.Count > 0) this.panelContenedor.Controls.RemoveAt(0);
+            if (this.panelContenedor.Controls.Count > 0)
+            {
+                PrincipalAdminController.LimpiarPanel = true;
+                this.panelContenedor.Controls.RemoveAt(0);
+            }
+
+            PrincipalAdminController.LimpiarPanel = false;
             Form formHijo = fH as Form;
             formHijo.TopLevel = false;
             formHijo.Dock = DockStyle.Fill;
             this.panelContenedor.Controls.Add(formHijo);
             this.panelContenedor.Tag = formHijo;
             formHijo.Show();
-            
+
+
         }
+
+        private void MostrarContenido(Object fH, bool hide)
+        {
+            if (this.panelContenedor.Controls.Count > 0 && !PrincipalAdminController.HideForm)
+            {
+                PrincipalAdminController.LimpiarPanel = true;
+                this.panelContenedor.Controls.RemoveAt(0);
+                PrincipalAdminController.LimpiarPanel = false;
+                Form formHijo = fH as Form;
+                formHijo.TopLevel = false;
+                formHijo.Dock = DockStyle.Fill;
+                this.panelContenedor.Controls.Add(formHijo);
+                this.panelContenedor.Tag = formHijo;
+                formHijo.Show();
+
+            }
+            else
+            {               
+                PrincipalAdminController.LimpiarPanel = false;
+                Form formHijo = fH as Form;
+                formHijo.TopLevel = false;
+                formHijo.Dock = DockStyle.Fill;
+                this.panelContenedor.Controls.Add(formHijo);
+                this.panelContenedor.Tag = formHijo;
+                formHijo.Show();
+
+            }
+
+        }
+
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
+            UsuarioModel.Editar = false;
             MostrarContenido(new CapturarUsuario());
         }
+
+        private void panelContenedor_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            if (!PrincipalAdminController.LimpiarPanel)
+            {
+                if (!PrincipalAdminController.HideForm) MostrarContenido(PrincipalAdminController.CambioInfo_Cerrar);
+                    else MostrarContenido(PrincipalAdminController.CambioInfo_Hide, PrincipalAdminController.HideForm);
+                PrincipalAdminController.CambioInfo_Cerrar.VisibleChanged += (object send, EventArgs args) =>
+                    {        
+                            if (!PrincipalAdminController.HideForm)
+                           MostrarContenido(PrincipalAdminController.CambioInfo_Cerrar, PrincipalAdminController.HideForm);
+                    };
+
+
+
+
+
+
+
+            }
+
+        }
+
+        private void panelContenedor_Esconder()
+        {
+
+        }
+
+
+        private void btnVer_Click(object sender, EventArgs e)
+        {
+            MostrarContenido(new PruebasCRUDUsuario());
+        }
+
+
+
     }
 }

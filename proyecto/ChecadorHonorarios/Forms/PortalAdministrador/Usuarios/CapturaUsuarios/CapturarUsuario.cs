@@ -53,12 +53,12 @@ namespace ChecadorHonorarios.Forms
                     UsuarioModel.Usuario.birthday = NacimientoPicker.Value;
                     UsuarioModel.Usuario.jobPosition = Puestotxt.Text;
 
-                    //RUController.GuardarUsuario(usuario);
-
-
-                    CapturarSchedule formSchedule = new CapturarSchedule();
-                    formSchedule.ShowDialog();
-                    this.Close();
+                //RUController.GuardarUsuario(usuario);
+                PrincipalAdminController.CambioInfo_Cerrar = new CapturarSchedule();
+                this.Close();
+                
+                    
+                    
 
                 }
             
@@ -176,7 +176,5 @@ namespace ChecadorHonorarios.Forms
             NacimientoPicker.Format = DateTimePickerFormat.Short;
             NacimientoPicker.CustomFormat = null;
         }
-
-      
     }
 }

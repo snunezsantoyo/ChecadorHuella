@@ -38,7 +38,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(201, 55);
+            this.textBox1.Location = new System.Drawing.Point(12, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(386, 22);
             this.textBox1.TabIndex = 0;
@@ -47,16 +47,16 @@
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(75, 165);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 44);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(680, 188);
+            this.dataGridView1.Size = new System.Drawing.Size(776, 394);
             this.dataGridView1.TabIndex = 1;
             // 
             // buscar
             // 
-            this.buscar.Location = new System.Drawing.Point(634, 54);
+            this.buscar.Location = new System.Drawing.Point(404, 12);
             this.buscar.Name = "buscar";
             this.buscar.Size = new System.Drawing.Size(75, 23);
             this.buscar.TabIndex = 2;
@@ -66,7 +66,7 @@
             // 
             // All
             // 
-            this.All.Location = new System.Drawing.Point(373, 106);
+            this.All.Location = new System.Drawing.Point(629, 12);
             this.All.Name = "All";
             this.All.Size = new System.Drawing.Size(75, 23);
             this.All.TabIndex = 3;
@@ -76,7 +76,8 @@
             // 
             // nuevo
             // 
-            this.nuevo.Location = new System.Drawing.Point(634, 124);
+            this.nuevo.Enabled = false;
+            this.nuevo.Location = new System.Drawing.Point(710, 12);
             this.nuevo.Name = "nuevo";
             this.nuevo.Size = new System.Drawing.Size(75, 26);
             this.nuevo.TabIndex = 4;
@@ -94,9 +95,9 @@
             this.Controls.Add(this.buscar);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PruebasCRUDUsuario";
             this.Text = "PruebasCRUDUsuario";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

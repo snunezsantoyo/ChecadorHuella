@@ -111,6 +111,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(647, 450);
             this.Controls.Add(this.Agregar);
             this.Controls.Add(this.SalidaLabel);
@@ -119,6 +120,7 @@
             this.Controls.Add(this.EntradaPicker);
             this.Controls.Add(this.InstruccionesLabel);
             this.Controls.Add(this.scheduleList);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CapturarSchedule";
             this.Text = "CapturarSchedule";
             this.Load += new System.EventHandler(this.CapturarSchedule_Load);

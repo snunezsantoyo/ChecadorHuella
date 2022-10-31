@@ -1,4 +1,5 @@
 ﻿using ChecadorHonorarios.Controllers;
+using ChecadorHonorarios.Forms;
 using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,11 +37,14 @@ namespace ChecadorHonorarios
         {
             UsuarioModel.Verificar = false;
             CaptureForm capturar = new CaptureForm();
+            
             capturar.OnTemplate += this.OnTemplate;
-            capturar.ShowDialog();
-
-
+            PrincipalAdminController.CambioInfo_Cerrar = capturar;           
+            PrincipalAdminController.CambioInfo_Hide = this;
+            this.Hide();          
         }
+
+      
 
         private void OnTemplate(DPFP.Template template)
         {
@@ -104,6 +109,10 @@ namespace ChecadorHonorarios
                     Listar();
                     Template = null;
                     BtnAgregar.Enabled = false;
+                    PrincipalAdminController.HideForm = false;
+                    PrincipalAdminController.CambioInfo_Hide = null;
+                    PrincipalAdminController.CambioInfo_Cerrar = new PruebasCRUDUsuario();
+                    this.Close();
                 }
                 else
                 {
@@ -115,6 +124,11 @@ namespace ChecadorHonorarios
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Registrar_VisibleChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

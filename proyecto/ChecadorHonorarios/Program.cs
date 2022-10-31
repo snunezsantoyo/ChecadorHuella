@@ -19,7 +19,7 @@ namespace ChecadorHonorarios
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new LoginAdmin());
-             Application.Run(new Main());
+             Application.Run(new LoginAdmin());
         }
     }
 }
