@@ -69,10 +69,10 @@ namespace ChecadorHonorarios.Forms
             if (e.ColumnIndex == dataGridView1.Columns[eliminar.Name].Index)
                 UController.EliminarUsuario(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));
             if (e.ColumnIndex == dataGridView1.Columns[editar.Name].Index)
-            {
-                MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+            {              
                 UController = new UsuarioController();
                 UController.HabilitarEditarUsuarios(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));
+                PrincipalAdminController.EstadoForm_Set("CLOSE");
                 this.Close();
             }
 

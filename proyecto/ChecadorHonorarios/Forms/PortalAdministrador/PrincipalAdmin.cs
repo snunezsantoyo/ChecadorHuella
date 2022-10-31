@@ -46,7 +46,6 @@ namespace ChecadorHonorarios
         private void btnMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-
         }
 
         /*El siguiente código se usa para que la ventana se pueda mover al arrastrar la barra de Titulo*/
@@ -62,14 +61,23 @@ namespace ChecadorHonorarios
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
+   
         private void MostrarContenido(Object fH)
         {
             if (this.panelContenedor.Controls.Count > 0)
-            {
-                PrincipalAdminController.LimpiarPanel = true;
-                this.panelContenedor.Controls.RemoveAt(0);
-            }
+            {              
+                    PrincipalAdminController.LimpiarPanel = true;
+                    this.panelContenedor.Controls.RemoveAt(0);          
+                
+              if (PrincipalAdminController.CancelarProceso)
+                {
+                    if (PrincipalAdminController.CambioInfo_Cerrar != null) PrincipalAdminController.CambioInfo_Cerrar.Close();
+                    if (PrincipalAdminController.CambioInfo_Hide != null) PrincipalAdminController.CambioInfo_Hide.Close();
 
+                    PrincipalAdminController.CancelarProceso = false;
+                }
+              
+            }
             PrincipalAdminController.LimpiarPanel = false;
             Form formHijo = fH as Form;
             formHijo.TopLevel = false;
@@ -80,10 +88,9 @@ namespace ChecadorHonorarios
 
 
         }
-
         private void MostrarContenido(Object fH, bool hide)
         {
-            if (this.panelContenedor.Controls.Count > 0 && !PrincipalAdminController.HideForm)
+            if (this.panelContenedor.Controls.Count > 0 && hide)
             {
                 PrincipalAdminController.LimpiarPanel = true;
                 this.panelContenedor.Controls.RemoveAt(0);
@@ -97,7 +104,7 @@ namespace ChecadorHonorarios
 
             }
             else
-            {               
+            {
                 PrincipalAdminController.LimpiarPanel = false;
                 Form formHijo = fH as Form;
                 formHijo.TopLevel = false;
@@ -112,27 +119,46 @@ namespace ChecadorHonorarios
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            UsuarioModel.Editar = false;
-            MostrarContenido(new CapturarUsuario());
+            if (UsuarioModel.Editar)
+            {
+                DialogResult dialogResult = MessageBox.Show("¿Desea abandonar la pagina actual? , Si abandona la pagina se perderan los cambios.", "ADVERTENCIA", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    PrincipalAdminController.EstadoForm_Set("CLOSE");
+                    UsuarioModel.Editar = false;
+                    PrincipalAdminController.CancelarProceso = true;
+                    MostrarContenido(new CapturarUsuario());
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    
+                }
+            }
+            else
+            {
+                PrincipalAdminController.EstadoForm_Set("CLOSE");
+                UsuarioModel.Editar = false;
+                MostrarContenido(new CapturarUsuario());
+            }
+            
         }
 
         private void panelContenedor_ControlRemoved(object sender, ControlEventArgs e)
         {
             if (!PrincipalAdminController.LimpiarPanel)
             {
-                if (!PrincipalAdminController.HideForm) MostrarContenido(PrincipalAdminController.CambioInfo_Cerrar);
-                    else MostrarContenido(PrincipalAdminController.CambioInfo_Hide, PrincipalAdminController.HideForm);
+                /* CLOSE       (1, 0)              -> Cuando cerramos una pantalla */
+                if (PrincipalAdminController.CloseForm && !PrincipalAdminController.HideForm) MostrarContenido(PrincipalAdminController.CambioInfo_Cerrar);
+                else if (PrincipalAdminController.CloseForm && PrincipalAdminController.HideForm)
+                    MostrarContenido(PrincipalAdminController.CambioInfo_Hide, true);
                 PrincipalAdminController.CambioInfo_Cerrar.VisibleChanged += (object send, EventArgs args) =>
-                    {        
-                            if (!PrincipalAdminController.HideForm)
-                           MostrarContenido(PrincipalAdminController.CambioInfo_Cerrar, PrincipalAdminController.HideForm);
+                    {
+                        /*HIDE        (0, 1)              -> Cuando escondemos una pantalla */
+                        if (!PrincipalAdminController.CloseForm  &&  PrincipalAdminController.HideForm)
+                           MostrarContenido(PrincipalAdminController.CambioInfo_Cerrar, false);
+                        /* SHOW        (1, 1)              -> Cuando queremos mostrar una pantalla que esta escondida*/
+                        
                     };
-
-
-
-
-
-
 
             }
 
@@ -146,6 +172,7 @@ namespace ChecadorHonorarios
 
         private void btnVer_Click(object sender, EventArgs e)
         {
+            PrincipalAdminController.EstadoForm_Set("CLOSE");
             MostrarContenido(new PruebasCRUDUsuario());
         }
 

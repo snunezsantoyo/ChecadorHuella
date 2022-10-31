@@ -41,6 +41,7 @@ namespace ChecadorHonorarios
             capturar.OnTemplate += this.OnTemplate;
             PrincipalAdminController.CambioInfo_Cerrar = capturar;           
             PrincipalAdminController.CambioInfo_Hide = this;
+            PrincipalAdminController.EstadoForm_Set("HIDE");
             this.Hide();          
         }
 

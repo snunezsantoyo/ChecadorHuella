@@ -120,16 +120,15 @@ namespace ChecadorHonorarios
 
                                 if (usuario != null)
                                 {
-                                    MakeReport();
                                     UsuarioModel.Usuario = usuario;
-                                    existe = true;
+                                    existe = true;                                    
                                     break;
                                 }
+                                                             
                             }
                         }
-                    }
-                    
-
+                    }                   
+                    MakeReport();                   
                 }
             }
             else
@@ -153,7 +152,7 @@ namespace ChecadorHonorarios
                                 OnTemplate(Enroller.Template);
                                 // SetPrompt("Click Close, and then click Fingerprint Verification.");
                                 Stop();
-                                PrincipalAdminController.HideForm = true;                                
+                                PrincipalAdminController.EstadoForm_Set("SHOW");                               
                                 break;
 
                             case DPFP.Processing.Enrollment.Status.Failed:  // report failure and restart capturing
@@ -227,8 +226,10 @@ namespace ChecadorHonorarios
                     img_respuesta.Image = Properties.Resources.huella_no_valida;
                     img_respuesta.Refresh();                    
                 }
+                contador = 0;
                 img_respuesta.Visible = true;
                 lbl_Respuesta.Visible = true;
+                existe = false;
             }));
         }
         #endregion
@@ -262,7 +263,7 @@ namespace ChecadorHonorarios
             //SetPrompt("Escanea tu misma huella otra vez");
             Process(Sample);
 
-            if (PrincipalAdminController.HideForm) Cerrar();
+            if (PrincipalAdminController.CloseForm) Cerrar();
 
         }
         
@@ -328,7 +329,7 @@ namespace ChecadorHonorarios
             lbl_fecha.Text = DateTime.Now.ToString("d MMMM yyyy");
             lbl_dia.Text = DateTime.Now.ToString("dddd"); 
 
-            if (contador > 3)
+            if (contador > 2)
             {
                 
                 if (lbl_Respuesta.Visible)
@@ -353,7 +354,6 @@ namespace ChecadorHonorarios
 
         private void continuar_Click(object sender, EventArgs e)
         {
-
             Close();
         }
     }
