@@ -7,8 +7,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Data;
 using System.Linq;
-
-
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace ChecadorHonorarios
 {
@@ -121,9 +121,41 @@ namespace ChecadorHonorarios
                                 if (usuario != null)
                                 {
                                     UsuarioModel.Usuario = usuario;
-                                    existe = true;                                    
+                                    existe = true;
+                                    checkRegister check = new checkRegister();
+
+                                    using (DbContextTransaction dbContextTransaction = contexto.Database.BeginTransaction())
+                                    {
+                                        try
+                                        {
+                                            if (usuario.status)
+                                            {
+                                               // if ()
+                                                usuario.status = false;
+                                                check.typeCheck = "SALIDA";
+                                            }
+                                            else
+                                            {
+                                                usuario.status = true;
+                                                check.typeCheck = "ENTRADA";
+                                            }
+                                            check.checkDate = DateTime.Now;
+                                            check.userID = usuario.userID;
+                                            contexto.checkRegisters.Add(check);
+                                            contexto.SaveChanges();
+                                            dbContextTransaction.Commit();
+
+                                        }
+                                        catch (Exception)
+                                        {
+                                            dbContextTransaction.Rollback();
+                                            throw;
+                                        }
+                                    }
+
                                     break;
-                                }
+                                    }
+                                
                                                              
                             }
                         }

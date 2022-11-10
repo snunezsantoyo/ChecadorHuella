@@ -42,23 +42,12 @@ create table users (
     constraint fkfingerprint foreign key (fingerprintID) REFERENCES fingerprint(fingerprintID)
 );
 
-create table verifyCheck(
+create table checkRegister(
     verifyCheckID smallint not null identity(1,1) primary key,
-    fingerprintID smallint not null, 
+    userID smallint not null, 
     checkDate date not null,
-    checkTime time not null, 
-    constraint fkfingerprint2 foreign key (fingerprintID) REFERENCES fingerprint(fingerprintID)
-);
-
-create table inAndOutHistory(
-    inAndOutHistoryID smallint not null identity(1,1) primary key,
-    userID smallint not null,
-    verifyCheckID smallint not null,
-    arrivingTime time not null,
-    leavingTime time not null, 
-    workDate date not null,
-    constraint fkusers foreign key (userID) REFERENCES users(userID),
-    constraint fkverifyCheck foreign key (verifyCheckID) REFERENCES verifyCheck(verifyCheckID)
+	status bit not null default 0,
+    constraint fkuser foreign key (userID) REFERENCES users(userID)
 );
 
 create table administrator (

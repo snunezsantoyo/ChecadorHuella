@@ -18,7 +18,6 @@ namespace ChecadorHonorarios.Models
         public fingerprint()
         {
             this.users = new HashSet<user>();
-            this.verifyChecks = new HashSet<verifyCheck>();
             this.administrators = new HashSet<administrator>();
         }
     
@@ -27,8 +26,6 @@ namespace ChecadorHonorarios.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> users { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<verifyCheck> verifyChecks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<administrator> administrators { get; set; }
     }

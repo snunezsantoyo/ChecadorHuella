@@ -7,18 +7,18 @@
       <Diagram DiagramId="dcc58c0ee2604d1ba07e27dde15ccab7" Name="Diagram1">
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.daysIn" Width="1.5" PointX="1.5" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.fingerprint" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.inAndOutHistory" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.inAndOutHistory" PointX="5.25" PointY="5.25" Width="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.schedule" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.user" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.verifyCheck" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
         <AssociationConnector Association="Honorarios_Check_DGTITModel.FK__schedule__daysIn__2C3393D0" ManuallyRouted="false" />
         <AssociationConnector Association="Honorarios_Check_DGTITModel.fkfingerprint" ManuallyRouted="false" />
-        <AssociationConnector Association="Honorarios_Check_DGTITModel.fkfingerprint2" ManuallyRouted="false" />
-        <AssociationConnector Association="Honorarios_Check_DGTITModel.fkusers" ManuallyRouted="false" />
-        <AssociationConnector Association="Honorarios_Check_DGTITModel.fkverifyCheck" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="Honorarios_Check_DGTITModel.fkusers" />
         <AssociationConnector Association="Honorarios_Check_DGTITModel.fkscheduleID" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.administrator" Width="1.5" PointX="3" PointY="15.5" />
         <AssociationConnector Association="Honorarios_Check_DGTITModel.fkfingerprint3" />
+        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.checkRegister" Width="1.5" PointX="5.625" PointY="2.5" />
+        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" />
+        <AssociationConnector Association="Honorarios_Check_DGTITModel.fkuser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

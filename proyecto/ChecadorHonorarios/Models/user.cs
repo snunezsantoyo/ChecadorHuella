@@ -17,7 +17,7 @@ namespace ChecadorHonorarios.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public user()
         {
-            this.inAndOutHistories = new HashSet<inAndOutHistory>();
+            this.checkRegisters = new HashSet<checkRegister>();
         }
     
         public short userID { get; set; }
@@ -30,11 +30,11 @@ namespace ChecadorHonorarios.Models
         public string jobPosition { get; set; }
         public string email { get; set; }
         public Nullable<bool> deleted { get; set; }
-        public Nullable<bool> status { get; set; }
+        public bool status { get; set; }
     
         public virtual fingerprint fingerprint { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<inAndOutHistory> inAndOutHistories { get; set; }
         public virtual schedule schedule { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<checkRegister> checkRegisters { get; set; }
     }
 }

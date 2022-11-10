@@ -119,11 +119,15 @@ namespace ChecadorHonorarios
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
+            UsuarioController usuarioController = new UsuarioController();
             if (UsuarioModel.Editar)
             {
+               
                 DialogResult dialogResult = MessageBox.Show("¿Desea abandonar la pagina actual? , Si abandona la pagina se perderan los cambios.", "ADVERTENCIA", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
+                    
+                    usuarioController.LimpiarCampos();
                     PrincipalAdminController.EstadoForm_Set("CLOSE");
                     UsuarioModel.Editar = false;
                     PrincipalAdminController.CancelarProceso = true;
@@ -136,6 +140,7 @@ namespace ChecadorHonorarios
             }
             else
             {
+                usuarioController.LimpiarCampos();
                 PrincipalAdminController.EstadoForm_Set("CLOSE");
                 UsuarioModel.Editar = false;
                 MostrarContenido(new CapturarUsuario());
@@ -176,7 +181,19 @@ namespace ChecadorHonorarios
             MostrarContenido(new PruebasCRUDUsuario());
         }
 
-
-
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            
+            
+                DialogResult dialogResult = MessageBox.Show("¿Desea abandonar el portal?", "ADVERTENCIA", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    this.Hide();
+                    LoginAdmin newAdmin = new LoginAdmin();
+                    newAdmin.ShowDialog();
+                    this.Close();
+                }
+                               
+        }
     }
 }

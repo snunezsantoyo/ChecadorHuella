@@ -114,6 +114,9 @@
     <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CaptureForm.Designer.cs">
       <DependentUpon>CaptureForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\checkRegister.cs">
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\daysIn.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
@@ -135,9 +138,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\inAndOutHistory.cs">
-      <DependentUpon>fingerprintModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Forms\PortalAdministrador\LoginAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +156,15 @@
     <Compile Include="Forms\PortalAdministrador\Admin\NuevoAdmin.Designer.cs">
       <DependentUpon>NuevoAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -169,9 +178,6 @@
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
-      <DependentUpon>fingerprintModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\verifyCheck.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\PortalAdministrador\PrincipalAdmin.resx">

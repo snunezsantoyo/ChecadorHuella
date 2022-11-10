@@ -3,6 +3,7 @@ using ChecadorHonorarios.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace ChecadorHonorarios.Controllers
@@ -25,21 +26,18 @@ namespace ChecadorHonorarios.Controllers
 
                         try
                         {
-                            contexto.daysIns.Add(UsuarioModel.DiasLaborales);
+                            contexto.daysIns.AddOrUpdate(UsuarioModel.DiasLaborales);
                             contexto.SaveChanges();
 
                             short pkdaysIn = UsuarioModel.DiasLaborales.daysInID;
                             UsuarioModel.Horarios.daysInID = pkdaysIn;
 
-
-                            contexto.schedules.Add(UsuarioModel.Horarios);
+                            contexto.schedules.AddOrUpdate(UsuarioModel.Horarios);
                             contexto.SaveChanges();
-
 
                             short pkschedule = UsuarioModel.Horarios.scheduleID;
 
-
-                            contexto.fingerprints.Add(UsuarioModel.Huella);
+                            contexto.fingerprints.AddOrUpdate(UsuarioModel.Huella);
                             contexto.SaveChanges();
 
                             short pkfingerprint = UsuarioModel.Huella.fingerprintID;
@@ -47,8 +45,7 @@ namespace ChecadorHonorarios.Controllers
                             UsuarioModel.Usuario.fingerprintID = pkfingerprint;
                             UsuarioModel.Usuario.scheduleID = pkschedule;
 
-
-                            contexto.users.Add(UsuarioModel.Usuario);
+                            contexto.users.AddOrUpdate(UsuarioModel.Usuario);
                             contexto.SaveChanges();
 
                             dbContextTransaction.Commit();
@@ -192,7 +189,8 @@ namespace ChecadorHonorarios.Controllers
                     if (usuario == null)
                         throw new Exception("No se encontraron resultados para tu busqueda");
 
-                    usuario.deleted = true;
+                    //usuario.deleted = true;
+                    contexto.users.Remove(usuario); 
                     contexto.SaveChanges();
                     eliminado = true;
                 }
@@ -233,9 +231,15 @@ namespace ChecadorHonorarios.Controllers
             PrincipalAdminController.CambioInfo_Cerrar = new CapturarUsuario();
         }
 
-        public void EditarUsuarios()
+        public void LimpiarCampos()
         {
+            UsuarioModel.Usuario = new user();
+            UsuarioModel.Huella = new fingerprint();
+            UsuarioModel.Horarios = new schedule();
+            UsuarioModel.DiasLaborales = new daysIn();
 
+            UsuarioModel.Editar = false;
+            
         }
 
     }

@@ -12,16 +12,12 @@ namespace ChecadorHonorarios.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class inAndOutHistory
+    public partial class sysdiagram
     {
-        public short inAndOutHistoryID { get; set; }
-        public short userID { get; set; }
-        public short verifyCheckID { get; set; }
-        public System.TimeSpan arrivingTime { get; set; }
-        public System.TimeSpan leavingTime { get; set; }
-        public System.DateTime workDate { get; set; }
-    
-        public virtual user user { get; set; }
-        public virtual verifyCheck verifyCheck { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
