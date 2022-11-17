@@ -11,7 +11,7 @@ namespace ChecadorHonorarios.Forms
         UsuarioController UController;
         DataGridViewButtonColumn editar; 
         DataGridViewButtonColumn eliminar;
-        List<user> lstusuarios = new List<user>() ;
+        List<view_user_filter_deleted> lstusuarios = new List<view_user_filter_deleted>() ;
         
         public PruebasCRUDUsuario()
         {
@@ -31,8 +31,8 @@ namespace ChecadorHonorarios.Forms
                 short id = Convert.ToInt16(textBox1.Text);
                 UController = new UsuarioController();
 
-                user usuario = UController.BuscarUsuarioByID(id);
-                lstusuarios = new List<user>();
+                view_user_filter_deleted usuario = UController.BuscarUsuarioValidoByID(id);
+                lstusuarios = new List<view_user_filter_deleted>();
                 Limpiar();
                 lstusuarios.Add(usuario);
                 dataGridView1.DataSource = lstusuarios;
@@ -45,36 +45,29 @@ namespace ChecadorHonorarios.Forms
             
         }
 
-        private void All_Click(object sender, EventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                UController = new UsuarioController();
-                lstusuarios = UController.ListarUsuarios();
-                Limpiar();
-                dataGridView1.DataSource = lstusuarios;
-                CrearBotones();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            
+                if (e.ColumnIndex == dataGridView1.Columns[eliminar.Name].Index)
+                    UController.EliminarUsuario(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells["Identificador"].Value));
+                if (e.ColumnIndex == dataGridView1.Columns[editar.Name].Index)
+                {
+                    UController = new UsuarioController();
+                    MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells["Identificador"].Value.ToString());
+                    UController.HabilitarEditarUsuarios(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells["Identificador"].Value));
+                    PrincipalAdminController.EstadoForm_Set("CLOSE");
+                    this.Close();
+                }
 
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-               
-            if (e.ColumnIndex == dataGridView1.Columns[eliminar.Name].Index)
-                UController.EliminarUsuario(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));
-            if (e.ColumnIndex == dataGridView1.Columns[editar.Name].Index)
-            {              
-                UController = new UsuarioController();
-                UController.HabilitarEditarUsuarios(Convert.ToInt16(dataGridView1.Rows[e.RowIndex].Cells[0].Value));
-                PrincipalAdminController.EstadoForm_Set("CLOSE");
-                this.Close();
             }
+            catch (Exception ex) {
+                MessageBox.Show("ERROR: " + ex.Message);
+
+            }
+
+
+
 
 
 
@@ -107,6 +100,22 @@ namespace ChecadorHonorarios.Forms
             CapturarUsuario nuevo = new CapturarUsuario();
             nuevo.ShowDialog();
             
+        }
+
+        private void PruebasCRUDUsuario_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                UController = new UsuarioController();
+                lstusuarios = UController.ListarUsuarios();
+                Limpiar();
+                dataGridView1.DataSource = lstusuarios;
+                CrearBotones();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

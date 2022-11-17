@@ -20,7 +20,6 @@ namespace ChecadorHonorarios.Models
         public Honorarios_Check_DGTITEntities()
             : base("name=Honorarios_Check_DGTITEntities")
         {
-            Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -35,6 +34,8 @@ namespace ChecadorHonorarios.Models
         public virtual DbSet<administrator> administrators { get; set; }
         public virtual DbSet<checkRegister> checkRegisters { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<view_user> view_user { get; set; }
+        public virtual DbSet<view_user_filter_deleted> view_user_filter_deleted { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

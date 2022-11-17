@@ -22,7 +22,8 @@ namespace ChecadorHonorarios
 
         private void LoginAdmin_Load(object sender, EventArgs e)
         {
-           
+            visibleOn.Visible = false;
+            visibleOff.Visible = false;
         }
         public LoginAdmin()
         {
@@ -171,6 +172,11 @@ namespace ChecadorHonorarios
                 ContraseñaText.PasswordChar = '*';
             }
             emptyContraseña.Visible = false;
+        }
+
+        private void ContraseñaText_TextChanged(object sender, EventArgs e)
+        {
+            visibleOff.Visible = true;
         }
     }
 }

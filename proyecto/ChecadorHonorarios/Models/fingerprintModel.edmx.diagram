@@ -19,6 +19,8 @@
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.checkRegister" Width="1.5" PointX="5.625" PointY="2.5" />
         <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" />
         <AssociationConnector Association="Honorarios_Check_DGTITModel.fkuser" />
+        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.view_user" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Honorarios_Check_DGTITModel.view_user_filter_deleted" Width="1.5" PointX="7.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

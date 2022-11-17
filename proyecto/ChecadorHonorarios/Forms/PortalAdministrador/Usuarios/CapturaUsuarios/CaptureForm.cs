@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Collections.Generic;
 
 namespace ChecadorHonorarios
 {
@@ -34,7 +35,7 @@ namespace ChecadorHonorarios
         DPFP.FeatureSet features;
         bool existe;
         int contador = 0;
-
+        TimeSpan tiempoRestante;
         #endregion
 
         public CaptureForm()
@@ -42,7 +43,14 @@ namespace ChecadorHonorarios
             InitializeComponent();
             panel_Registrar.Visible = false;
             if (!UsuarioModel.Verificar)
-            {           
+            { 
+                InstruccionesLabel.Visible = false;
+                lbl_Hora_Min.Visible = false;
+                lbl_segundos.Visible = false;
+                lbl_fecha.Visible = false;
+                lbl_dia.Visible = false;
+
+
                 panelTitulo.Visible = false;
                 panel_Registrar.Visible = true;
                 timer.Enabled = false;
@@ -115,7 +123,7 @@ namespace ChecadorHonorarios
                             using (contexto = new Honorarios_Check_DGTITEntities())
                             {
                                 user usuario = (from u in contexto.users
-                                                        where u.fingerprintID == finger.fingerprintID
+                                                        where u.fingerprintID == finger.fingerprintID && u.deleted == false
                                                         select u).FirstOrDefault();
 
                                 if (usuario != null)
@@ -128,22 +136,58 @@ namespace ChecadorHonorarios
                                     {
                                         try
                                         {
-                                            if (usuario.status)
+                                            UsuarioController UController  = new UsuarioController();
+
+                                            view_user estado_usuario = UController.EstadoUsuario_ByID(usuario.userID);
+                                            
+                                            if (estado_usuario.ACTIVO == "ACTIVO")
                                             {
-                                               // if ()
-                                                usuario.status = false;
-                                                check.typeCheck = "SALIDA";
+                                                //obtener el ultimo registro por fecha del usuario
+                                                checkRegister registro = (from cR in contexto.checkRegisters
+                                                                          where cR.userID == usuario.userID
+                                                                          orderby cR.checkDate descending
+                                                                          select cR
+                                                                ).FirstOrDefault();
+
+                                                //si la fecha actual es menor que la fecha del ultimo registro mas los 5 minutos
+                                                //entonces mandar mensaje de que ya reviso
+                                                if (DateTime.Now < registro.checkDate.Value.AddMinutes(5))
+                                                {
+                                                    tiempoRestante = DateTime.Now - registro.checkDate.Value;
+                                                    PrincipalAdminController.EstadoCheckUsuario = "CHECK_IN_NO_VALIDO"; //mandar mensaje de que ya reviso
+                                                }
+                                                //si es mayor la fecha de registro mas 5 minutos a la fecha actual, marcar como salida
+                                                else {
+                                                    //checkRegister registro = registros.Where(c => c.checkDate.Value.ToShortDateString() == DateTime.Now.ToShortDateString()).FirstOrDefault();
+                                                    PrincipalAdminController.EstadoCheckUsuario = "CHECK_OUT_VALIDO";
+                                                    usuario.status = false;
+                                                    check.typeCheck = "SALIDA";
+                                                }                                                                                             
                                             }
                                             else
                                             {
-                                                usuario.status = true;
-                                                check.typeCheck = "ENTRADA";
+                                                
+                                                if (estado_usuario.ACTIVO == "SALIDA")
+                                                {
+                                                    PrincipalAdminController.EstadoCheckUsuario = "CHECK_OUT_NO_VALIDO";
+                                                }
+                                                else
+                                                {
+                                                    PrincipalAdminController.EstadoCheckUsuario = "CHECK_IN_VALIDO";
+                                                    usuario.status = true;
+                                                    check.typeCheck = "ENTRADA";
+                                                }
+                                                                                                                                               
                                             }
-                                            check.checkDate = DateTime.Now;
-                                            check.userID = usuario.userID;
-                                            contexto.checkRegisters.Add(check);
-                                            contexto.SaveChanges();
-                                            dbContextTransaction.Commit();
+
+                                            if (PrincipalAdminController.EstadoCheckUsuario == "CHECK_IN_VALIDO" || PrincipalAdminController.EstadoCheckUsuario == "CHECK_OUT_VALIDO")
+                                            {
+                                                check.checkDate = DateTime.Now;
+                                                check.userID = usuario.userID;
+                                                contexto.checkRegisters.Add(check);
+                                                contexto.SaveChanges();
+                                                dbContextTransaction.Commit();
+                                            }
 
                                         }
                                         catch (Exception)
@@ -154,7 +198,7 @@ namespace ChecadorHonorarios
                                     }
 
                                     break;
-                                    }
+                                }
                                 
                                                              
                             }
@@ -243,21 +287,54 @@ namespace ChecadorHonorarios
        
         protected void MakeReport()
         {
-            this.Invoke(new Function(delegate () {                
-                if (existe)
-                {                 
-                    lbl_Respuesta.Text = ("El usuario ha sido verificado " + UsuarioModel.Usuario.name);
-                    img_respuesta.Size = Properties.Resources.huella_valida.Size;
-                    img_respuesta.Image = Properties.Resources.huella_valida;
-                    img_respuesta.Refresh();
-                }
-                else
+            this.Invoke(new Function(delegate () {
+
+                if (!existe) PrincipalAdminController.EstadoCheckUsuario = "USUARIO_NO_VALIDO";
+                switch (PrincipalAdminController.EstadoCheckUsuario)
                 {
-                    lbl_Respuesta.Text = ("Usuario no encontrado, por favor intente de nuevo");
-                    img_respuesta.Size = Properties.Resources.huella_no_valida.Size;
-                    img_respuesta.Image = Properties.Resources.huella_no_valida;
-                    img_respuesta.Refresh();                    
+                    case "CHECK_IN_VALIDO":
+                        lbl_Respuesta.Text = ("Bienvenido " + UsuarioModel.Usuario.name);
+                        img_respuesta.Size = Properties.Resources.huella_valida.Size;
+                        img_respuesta.Image = Properties.Resources.huella_valida;
+                        img_respuesta.Refresh();
+                        break;
+
+
+                    case "CHECK_IN_NO_VALIDO":
+                        lbl_Respuesta.Text = ("Hola " + UsuarioModel.Usuario.name + ", ya has realizado correctamente un CHECKIN," +
+                        " para hacer un CHECKOUT por favor espera.");
+                        img_respuesta.Size = Properties.Resources.huella_valida.Size;
+                        img_respuesta.Image = Properties.Resources.huella_valida;
+                        img_respuesta.Refresh();
+                        break;
+
+
+                    case "CHECK_OUT_VALIDO":
+                        lbl_Respuesta.Text = ("Hasta luego  " + UsuarioModel.Usuario.name);
+                        img_respuesta.Size = Properties.Resources.huella_valida.Size;
+                        img_respuesta.Image = Properties.Resources.huella_valida;
+                        img_respuesta.Refresh();
+                        break;
+
+
+                    case "CHECK_OUT_NO_VALIDO":
+                        lbl_Respuesta.Text = ("Hola " + UsuarioModel.Usuario.name + ", ya has realizado correctamente un CHECKIN Y CHECKOUT el dia de hoy.");
+                        img_respuesta.Size = Properties.Resources.huella_valida.Size;
+                        img_respuesta.Image = Properties.Resources.huella_valida;
+                        img_respuesta.Refresh();
+                        break;
+
+                    case "USUARIO_NO_VALIDO":
+                        lbl_Respuesta.Text = ("Usuario no encontrado, por favor intente de nuevo");
+                        img_respuesta.Size = Properties.Resources.huella_no_valida.Size;
+                        img_respuesta.Image = Properties.Resources.huella_no_valida;
+                        img_respuesta.Refresh();
+                        break;
+                    default:
+                        
+                        break;
                 }
+               
                 contador = 0;
                 img_respuesta.Visible = true;
                 lbl_Respuesta.Visible = true;

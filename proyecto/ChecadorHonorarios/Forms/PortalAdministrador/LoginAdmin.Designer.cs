@@ -79,6 +79,7 @@
             this.ContraseñaText.Text = "Contraseña";
             this.ContraseñaText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ContraseñaText.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ContraseñaText_MouseClick);
+            this.ContraseñaText.TextChanged += new System.EventHandler(this.ContraseñaText_TextChanged);
             this.ContraseñaText.Enter += new System.EventHandler(this.ContraseñaText_Enter);
             // 
             // Entrar

@@ -82,6 +82,56 @@
           <Property Name="deleted" Type="bit" />
           <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Honorarios_Check_DGTIT.dbo.view_user' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_user">
+          <Key>
+            <PropertyRef Name="userID" />
+            <PropertyRef Name="scheduleID" />
+            <PropertyRef Name="fingerprintID" />
+            <PropertyRef Name="birthday" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="lastname" />
+            <PropertyRef Name="lastname2" />
+            <PropertyRef Name="jobPosition" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="userID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scheduleID" Type="smallint" Nullable="false" />
+          <Property Name="fingerprintID" Type="smallint" Nullable="false" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="lastname2" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="jobPosition" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="ACTIVO" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Honorarios_Check_DGTIT.dbo.view_user_filter_deleted' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_user_filter_deleted">
+          <Key>
+            <PropertyRef Name="Identificador" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Apellido Paterno" />
+            <PropertyRef Name="Apellido Materno" />
+            <PropertyRef Name="Fecha de Nacimiento" />
+            <PropertyRef Name="Puesto" />
+            <PropertyRef Name="Correo" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Identificador" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido Paterno" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Apellido Materno" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Fecha de Nacimiento" Type="date" Nullable="false" />
+          <Property Name="Puesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
         <Association Name="FK__schedule__daysIn__2C3393D0">
           <End Role="daysIn" Type="Self.daysIn" Multiplicity="1" />
           <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
@@ -181,6 +231,34 @@
           <EntitySet Name="schedule" EntityType="Self.schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_user" EntityType="Self.view_user" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_user].[userID] AS [userID], 
+    [view_user].[scheduleID] AS [scheduleID], 
+    [view_user].[fingerprintID] AS [fingerprintID], 
+    [view_user].[birthday] AS [birthday], 
+    [view_user].[name] AS [name], 
+    [view_user].[lastname] AS [lastname], 
+    [view_user].[lastname2] AS [lastname2], 
+    [view_user].[jobPosition] AS [jobPosition], 
+    [view_user].[email] AS [email], 
+    [view_user].[deleted] AS [deleted], 
+    [view_user].[status] AS [status], 
+    [view_user].[ACTIVO] AS [ACTIVO]
+    FROM [dbo].[view_user] AS [view_user]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="view_user_filter_deleted" EntityType="Self.view_user_filter_deleted" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_user_filter_deleted].[Identificador] AS [Identificador], 
+    [view_user_filter_deleted].[Nombre] AS [Nombre], 
+    [view_user_filter_deleted].[Apellido Paterno] AS [Apellido Paterno], 
+    [view_user_filter_deleted].[Apellido Materno] AS [Apellido Materno], 
+    [view_user_filter_deleted].[Fecha de Nacimiento] AS [Fecha de Nacimiento], 
+    [view_user_filter_deleted].[Puesto] AS [Puesto], 
+    [view_user_filter_deleted].[Correo] AS [Correo], 
+    [view_user_filter_deleted].[Estado] AS [Estado]
+    FROM [dbo].[view_user_filter_deleted] AS [view_user_filter_deleted]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__schedule__daysIn__2C3393D0" Association="Self.FK__schedule__daysIn__2C3393D0">
             <End Role="daysIn" EntitySet="daysIn" />
             <End Role="schedule" EntitySet="schedule" />
@@ -352,6 +430,8 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="view_user" EntityType="Honorarios_Check_DGTITModel.view_user" />
+          <EntitySet Name="view_user_filter_deleted" EntityType="Honorarios_Check_DGTITModel.view_user_filter_deleted" />
         </EntityContainer>
         <EntityType Name="administrator">
           <Key>
@@ -423,6 +503,52 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="view_user">
+          <Key>
+            <PropertyRef Name="userID" />
+            <PropertyRef Name="scheduleID" />
+            <PropertyRef Name="fingerprintID" />
+            <PropertyRef Name="birthday" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="lastname" />
+            <PropertyRef Name="lastname2" />
+            <PropertyRef Name="jobPosition" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="userID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scheduleID" Type="Int16" Nullable="false" />
+          <Property Name="fingerprintID" Type="Int16" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="lastname2" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="jobPosition" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="deleted" Type="Boolean" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="ACTIVO" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="view_user_filter_deleted">
+          <Key>
+            <PropertyRef Name="Identificador" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Apellido_Paterno" />
+            <PropertyRef Name="Apellido_Materno" />
+            <PropertyRef Name="Fecha_de_Nacimiento" />
+            <PropertyRef Name="Puesto" />
+            <PropertyRef Name="Correo" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Identificador" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido_Paterno" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido_Materno" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_de_Nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Puesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -537,6 +663,38 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Honorarios_Check_DGTITModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Honorarios_Check_DGTITModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="view_user">
+            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.view_user">
+              <MappingFragment StoreEntitySet="view_user">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="jobPosition" ColumnName="jobPosition" />
+                <ScalarProperty Name="lastname2" ColumnName="lastname2" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="fingerprintID" ColumnName="fingerprintID" />
+                <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_user_filter_deleted">
+            <EntityTypeMapping TypeName="Honorarios_Check_DGTITModel.view_user_filter_deleted">
+              <MappingFragment StoreEntitySet="view_user_filter_deleted">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="Fecha_de_Nacimiento" ColumnName="Fecha de Nacimiento" />
+                <ScalarProperty Name="Apellido_Materno" ColumnName="Apellido Materno" />
+                <ScalarProperty Name="Apellido_Paterno" ColumnName="Apellido Paterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

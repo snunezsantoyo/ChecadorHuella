@@ -44,6 +44,7 @@ namespace ChecadorHonorarios.Controllers
 
                             UsuarioModel.Usuario.fingerprintID = pkfingerprint;
                             UsuarioModel.Usuario.scheduleID = pkschedule;
+                            UsuarioModel.Usuario.deleted = false;
 
                             contexto.users.AddOrUpdate(UsuarioModel.Usuario);
                             contexto.SaveChanges();
@@ -189,8 +190,8 @@ namespace ChecadorHonorarios.Controllers
                     if (usuario == null)
                         throw new Exception("No se encontraron resultados para tu busqueda");
 
-                    //usuario.deleted = true;
-                    contexto.users.Remove(usuario); 
+                    usuario.deleted = true;
+                   // contexto.users.Remove(usuario); 
                     contexto.SaveChanges();
                     eliminado = true;
                 }
@@ -202,14 +203,60 @@ namespace ChecadorHonorarios.Controllers
             return eliminado;
         }
 
-        public List<user> ListarUsuarios()
+        // Se debe usar esta consulta para buscar Usuarios que no han sido eliminados, se busca dentro de una consulta que solo trae 
+        // Usuarios que actualmente son trabajadores activos
+        public view_user_filter_deleted BuscarUsuarioValidoByID(short UsuarioID)
+        {
+            try
+            {
+                if (UsuarioID == 0) throw new Exception("Ingresa un id");
+
+                using (contexto = new Honorarios_Check_DGTITEntities())
+                {
+                    view_user_filter_deleted usuario = (from v in contexto.view_user_filter_deleted
+                                                        where v.Identificador == UsuarioID
+                                                        select v).FirstOrDefault();
+
+                    if (usuario == null)
+                        throw new Exception("No se encontraron resultados para tu busqueda");
+
+                    return usuario;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public view_user EstadoUsuario_ByID (short usuarioID)
         {
             try
             {
                 using (contexto = new Honorarios_Check_DGTITEntities())
                 {
-                    List<user> lstUsuario = (from u in contexto.users
-                                             select u).ToList();
+                    view_user usuario = (from EU in contexto.view_user
+                                         where EU.userID == usuarioID
+                                         select EU).FirstOrDefault();
+                        return usuario;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        // Lista todos los usuarios que actualmente trabajan en el departamento 
+        public List<view_user_filter_deleted> ListarUsuarios()
+        {
+            try
+            {
+                using (contexto = new Honorarios_Check_DGTITEntities())
+                {
+                    
+                    List<view_user_filter_deleted> lstUsuario = (contexto.view_user_filter_deleted.ToList());
                     return lstUsuario;
                 }
             }
@@ -241,8 +288,10 @@ namespace ChecadorHonorarios.Controllers
             UsuarioModel.Editar = false;
             
         }
-
+       
     }
+
+   
 
 
 }
