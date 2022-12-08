@@ -26,7 +26,14 @@ namespace ChecadorHonorarios
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult dialogResult = MessageBox.Show("¿Desea abandonar el portal?", "ADVERTENCIA", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Hide();
+                LoginAdmin newAdmin = new LoginAdmin();
+                newAdmin.ShowDialog();
+                this.Close();
+            }
         }
 
         private void btnMaximizar_Click(object sender, EventArgs e)
@@ -194,6 +201,13 @@ namespace ChecadorHonorarios
                     this.Close();
                 }
                                
+        }
+
+
+        private void PrincipalAdmin_Load(object sender, EventArgs e)
+        {
+            PrincipalAdminController.EstadoForm_Set("INIT");
+            MostrarContenido(new PantallaPrincipal());
         }
     }
 }

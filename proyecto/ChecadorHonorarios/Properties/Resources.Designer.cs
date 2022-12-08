@@ -63,6 +63,16 @@ namespace ChecadorHonorarios.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap finanzas_logo {
+            get {
+                object obj = ResourceManager.GetObject("finanzas-logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap huella_no_valida {
             get {
                 object obj = ResourceManager.GetObject("huella_no_valida", resourceCulture);

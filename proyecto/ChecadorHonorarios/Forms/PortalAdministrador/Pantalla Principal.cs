@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ChecadorHonorarios.Forms
 {
-    public partial class PortalAdmin : Form
+    public partial class PantallaPrincipal : Form
     {
-        public PortalAdmin()
+        public PantallaPrincipal()
         {
             InitializeComponent();
         }
@@ -21,7 +21,7 @@ namespace ChecadorHonorarios.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             NuevoAdmin nuevoAdmin = new NuevoAdmin();
-            nuevoAdmin.ShowDialog();           
+            nuevoAdmin.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)

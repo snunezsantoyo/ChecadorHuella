@@ -93,11 +93,11 @@
     <Compile Include="Forms\PortalAdministrador\Usuarios\CapturaUsuarios\CapturarUsuario.Designer.cs">
       <DependentUpon>CapturarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PortalAdministrador\PortalAdmin.cs">
+    <Compile Include="Forms\PortalAdministrador\Pantalla Principal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PortalAdministrador\PortalAdmin.Designer.cs">
-      <DependentUpon>PortalAdmin.cs</DependentUpon>
+    <Compile Include="Forms\PortalAdministrador\Pantalla Principal.Designer.cs">
+      <DependentUpon>Pantalla Principal.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PortalAdministrador\Usuarios\PruebasCRUDUsuario.cs">
       <SubType>Form</SubType>
@@ -169,6 +169,9 @@
     <Compile Include="Models\view_user.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\view_user_ACTIVO.cs">
+      <DependentUpon>fingerprintModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\view_user_filter_deleted.cs">
       <DependentUpon>fingerprintModel.tt</DependentUpon>
     </Compile>
@@ -207,8 +210,8 @@
     <EmbeddedResource Include="Forms\PortalAdministrador\Admin\NuevoAdmin.resx">
       <DependentUpon>NuevoAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PortalAdministrador\PortalAdmin.resx">
-      <DependentUpon>PortalAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\PortalAdministrador\Pantalla Principal.resx">
+      <DependentUpon>Pantalla Principal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PortalAdministrador\Usuarios\PruebasCRUDUsuario.resx">
       <DependentUpon>PruebasCRUDUsuario.cs</DependentUpon>
@@ -261,6 +264,8 @@
       <DependentUpon>fingerprintModel.edmx</DependentUpon>
       <LastGenOutput>fingerprintModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\finanzas-logo.png" />
+    <None Include="Resources\finanzas-logo1.png" />
     <None Include="Resources\huella_no_valida.png" />
     <None Include="Resources\huella_valida.png" />
   </ItemGroup>

@@ -104,9 +104,7 @@ namespace ChecadorHonorarios
             {
                 features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
                 if (features != null)
-                {
-
-                   
+                {                  
                     Verification.Result result = new Verification.Result();
 
                     DPFP.Template template = new DPFP.Template();
@@ -198,9 +196,7 @@ namespace ChecadorHonorarios
                                     }
 
                                     break;
-                                }
-                                
-                                                             
+                                }                                                                                           
                             }
                         }
                     }                   
@@ -283,8 +279,27 @@ namespace ChecadorHonorarios
                 continuar.Enabled = true; 
             }));
         }
-            
-       
+
+/*ESTADOS DE RESPUESTA 
+
+ 1. CHECK_IN_VALIDO		    El usuario existe y registra entrada						
+
+ 2. CHECK_IN_NO_VALIDO 	    El usuario existe y checa 5 min posterior a su ultimo registro de entrada
+
+ 3. CHECK_OUT_VALIDO 	    El usuario existe y registra salida 
+
+ 4. CHECK_OUT_NO_VALIDO     El usuario existe e intenta registrar una segunda salida
+
+ 5. USUARIO_NO_VALIDO 	    El usuario no existe 
+
+
+
+ NOTA . Todos estos estados se crean bajo el criterio de que solo es posible tener un registro de checkin y checkout 
+
+ (uno de cada uno) por día, NO es posible tener más de un registro al día, por lo que el usuario deberá ser cuidadoso
+
+ a la hora de hacer su check de entrada y salida.*/
+
         protected void MakeReport()
         {
             this.Invoke(new Function(delegate () {
@@ -346,18 +361,12 @@ namespace ChecadorHonorarios
         #region Form Event Handlers:
 
         private void CaptureForm_Load(object sender, EventArgs e)
-        {
-            //FullScreen_Bouns();
+        {            
             Init();
             Start();                                                // Start capture operation.         
         }
         
-        private void FullScreen_Bouns()
-        {
-            this.WindowState = FormWindowState.Normal;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.Bounds = Screen.PrimaryScreen.Bounds;
-        }
+    
         private void CaptureForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Stop();

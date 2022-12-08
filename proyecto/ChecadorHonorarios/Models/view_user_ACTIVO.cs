@@ -12,7 +12,7 @@ namespace ChecadorHonorarios.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class view_user_filter_deleted
+    public partial class view_user_ACTIVO
     {
         public short Identificador { get; set; }
         public string Nombre { get; set; }
@@ -21,5 +21,6 @@ namespace ChecadorHonorarios.Models
         public System.DateTime Fecha_de_Nacimiento { get; set; }
         public string Puesto { get; set; }
         public string Correo { get; set; }
+        public string ACTIVO { get; set; }
     }
 }

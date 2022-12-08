@@ -29,7 +29,7 @@ namespace ChecadorHonorarios
         {
             InitializeComponent();
 
-           //Checa si el boton mostrar contraseña esta siendo presionado
+           //Checa si el boton 'mostrar contraseña' esta siendo presionado
 
             visibleOff.MouseDown += (sender, args) =>
             {
@@ -117,11 +117,9 @@ namespace ChecadorHonorarios
             emptyUsuario.Visible = false;
             emptyContraseña.Visible = false;
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
+        /// <summary>
+        /// Librerias para mover la pantalla al arrastrar el panel titulo 
+        /// </summary>
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void RealeaseCapture();
@@ -161,7 +159,7 @@ namespace ChecadorHonorarios
             UsuarioModel.Verificar = true;
             CaptureForm checar = new CaptureForm();
             checar.ShowDialog();
-            this.Close();
+            this.Show();
         }
 
         private void ContraseñaText_Enter(object sender, EventArgs e)
